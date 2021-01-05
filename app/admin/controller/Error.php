@@ -14,7 +14,6 @@ class Error
             'message' => '控制器不存在',
             'rel' => null
         ];
-        return json($result,400);
         return show(config("status.controller_not_found"),"控制器不存在");
     }
 }

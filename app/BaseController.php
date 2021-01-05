@@ -105,7 +105,6 @@ abstract class BaseController
             'message' => $name.'方法不存在',
             'rel' => null
         ];
-        return json($result,400);
         return show(config("status.action_not_found"),"该方法{$name}不存在");
     }
 
