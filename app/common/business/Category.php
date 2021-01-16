@@ -172,6 +172,15 @@ class Category
         return $parentCategory;
     }
 
+    /**
+     * 更新分类
+     * @param $data
+     * @return bool
+     * @throws Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function editSave($data){
         $categoryInfo = $this->getById($data['id']);
         if (empty($categoryInfo)){
@@ -188,5 +197,20 @@ class Category
             throw new Exception("系统错误");
         }
         return $result;
+    }
+
+    /**
+     * 根据pid获取分类数据
+     * @param int $pid
+     * @return array
+     */
+    public function getCategoryByPid($pid = 0){
+        $field = "id,name,pid";
+        try {
+            $result = $this->model->getCategoryByPid($pid,$field);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
     }
 }

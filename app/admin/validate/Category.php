@@ -9,7 +9,7 @@ use think\Validate;
 class Category extends Validate
 {
     protected $rule = [
-        'pid' => 'require',
+        'pid' => 'require|integer',
         'name' => 'require',
         'id' => 'require|integer',
         'orderlist' => 'require|integer',
@@ -18,6 +18,7 @@ class Category extends Validate
 
     protected $message = [
       'pid' => 'pid必填',
+      'pid.integer' => 'pid数值类型错误',
       'name' => '分类名称必填',
        'id.require' => 'id不能为空',
        'id.integer' => 'id类型错误',
@@ -32,6 +33,7 @@ class Category extends Validate
         'changeStatus' => ['id','status'],
         'del' => ['id'],
         'edit' => ['id'],
-        'editSave' => ['id','name']
+        'editSave' => ['id','name'],
+        'getPid' => ['pid']
     ];
 }

@@ -140,13 +140,13 @@
 
         // 添加 分类
         $('.add').on('click', function () {
-            layObj.dialog("{:url('add')}")
+            layObj.dialog("{:url('add')}",'添加分类')
         });
 
         // 编辑 分类
         $('.edit').on('click', function () {
             let id = $(this).attr('data-id');
-            layObj.dialog("{:url('edit')}?id="+id)
+            layObj.dialog("{:url('edit')}?id="+id,'编辑分类')
         });
 
         //监听状态 更改

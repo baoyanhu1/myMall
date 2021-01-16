@@ -223,4 +223,34 @@ class Category extends AdminBase
         }
         return show(config("status.success"),"分类删除成功");
     }
+
+    /**
+     * 返回一级分类及渲染商品分类页
+     */
+    public function dialog(){
+        $categoryBus = new CategoryBus();
+        $categoryInfo = $categoryBus->getCategoryByPid();
+        return View::fetch("",[
+            "categorys" => json_encode($categoryInfo)
+        ]);
+    }
+
+    /**
+     * 根据pid获取层级分类信息
+     */
+    public function getByPid(){
+        $pid = input("param.pid","","intval");
+        $data = [
+            'pid' => $pid
+        ];
+        $categoryVil = new CategoryVil();
+        $check = $categoryVil->scene("getPid")->check($data);
+        if (!$check){
+            return show(config("status.error"),$categoryVil->getError());
+        }
+
+        $categoryBus = new CategoryBus();
+        $categoryInfo = $categoryBus->getCategoryByPid($pid);
+        return show(config("status.success"),'OK',$categoryInfo);
+    }
 }

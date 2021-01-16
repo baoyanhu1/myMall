@@ -144,6 +144,11 @@ class Category extends Model
         return $result;
     }
 
+    /**
+     * 更新分类
+     * @param $data
+     * @return bool
+     */
     public function editSave($data){
         $where = [
             'id' => $data['id']
@@ -153,6 +158,31 @@ class Category extends Model
             'update_time' => time()
         ];
         $result = $this->where($where)->save($save_data);
+        return $result;
+    }
+
+    /**
+     * 根据获取分类数据
+     * @param $pid
+     * @param $field
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getCategoryByPid($pid,$field){
+        $where = [
+            'pid' => $pid,
+            'status' => config("status.mysql.table_normal")
+        ];
+        $order = [
+            'listorder' => 'asc',
+            'id' => 'asc'
+        ];
+        $result = $this->where($where)
+            ->field($field)
+            ->order($order)
+            ->select();
         return $result;
     }
 }

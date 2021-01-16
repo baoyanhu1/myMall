@@ -46,14 +46,25 @@ layui.define(["element", "jquery"], function (exports) {
             layuimini.initBgColor();
             layuimini.initDevice();
             $.getJSON(url, function (data, status) {
+                // console.log(data);
+                // console.log(JSON.parse(data));
+                // var menu = JSON.parse(data);
+                // console.log(menu.logoInfo)
                 if (data == null) {
                     layuimini.msg_error('暂无菜单信息');
                 } else {
+                    //menu改为后台返回数据
                     layuimini.initHome(data.homeInfo);
                     layuimini.initLogo(data.logoInfo);
                     layuimini.initClear(data.clearInfo);
                     layuimini.initMenu(data.menuInfo);
                     layuimini.initTab();
+
+                    //  layuimini.initHome(menu.homeInfo);
+                    // layuimini.initLogo(menu.logoInfo);
+                    // layuimini.initClear(menu.clearInfo);
+                    // layuimini.initMenu(menu.menuInfo);
+                    // layuimini.initTab();
                 }
             }).fail(function () {
                 layuimini.msg_error('菜单接口有误');

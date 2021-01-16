@@ -80,7 +80,8 @@ function createTab(type='') {
 		for(let t = 0 ; t < skuTypeArr.length ; t ++){
 			SKUTableDom += '<th>'+skuTypeArr[t].skuTypeTitle+'</th>';
 		}
-		SKUTableDom += '<th>价格</th><th>库存</th>';
+		// SKUTableDom += '<th>价格</th><th>库存</th>';
+		SKUTableDom += '<th>销售价格</th><th>市场价格</th><th>库存</th>';
 		SKUTableDom += "</tr>";
 		//循环处理表体
 		for(var i = 0 ; i < totalRow ; i ++){//总共需要创建多少行
@@ -117,6 +118,7 @@ function createTab(type='') {
 
 			var propvalids = propvalidArr.toString()
 			var alreadySetSkuPrice = "";//已经设置的SKU价格
+			var alreadySetSkuCostPrice = "";//已经设置的SKU市场价格
 			var alreadySetSkuStock = "";//已经设置的SKU库存
 			console.log(propvalids, '已经设置的SKU库存')
 			//赋值
@@ -124,6 +126,7 @@ function createTab(type='') {
 				var currGroupSkuVal = alreadySetSkuVals[propvalids];//当前这组SKU值
 				if(currGroupSkuVal){
 					alreadySetSkuPrice = currGroupSkuVal.skuPrice;
+					alreadySetSkuCostPrice = currGroupSkuVal.skuCostPrice;
 					alreadySetSkuStock = currGroupSkuVal.skuStock
 				}
 			}
@@ -131,7 +134,8 @@ function createTab(type='') {
 			SKUTableDom += `<tr propvalids='${propvalids}' propids='${propIdArr.toString()}'
  								 propvalnames='${propvalnameArr.join(";")}'  propnames='${propNameArr.join(";")}' class="sku_table_tr">
 						${currRowDoms}
-					<td><input type="text" class="setting_sku_price" value="${alreadySetSkuPrice}"/></td>
+					<td><input type="text" class="setting_sell_sku_price" value="${alreadySetSkuPrice}"/></td>
+					<td><input type="text" class="setting_market_sku_price" value="${alreadySetSkuCostPrice}"/></td>
 					<td><input type="text" class="setting_sku_stock" value="${alreadySetSkuStock}"/></td>
 					</tr>`;
 		}
@@ -148,13 +152,15 @@ function getAlreadySetSkuVals(){
 
 	// console.log(alreadySetSkuVals, 'alreadySetSkuVals')
 	$(".sku_table_tr").each(function(){
-		var skuPrice = $(this).find("input[type='text'][class*='setting_sku_price']" ).val() || 0;//SKU价格
+		var skuPrice = $(this).find("input[type='text'][class*='setting_sku_price']" ).val() || 0;//SKU销售价格
+		var skuCostPrice = $(this).find("input[type='text'][class*='setting_sku_cost_price']" ).val() || 0;//SKU市场价格
 		var skuStock = $(this).find("input[type='text'][class*='setting_sku_stock']").val() || 0;//SKU库存
 		if(skuPrice || skuStock){//已经设置了全部或部分值
 			var propvalids = $(this).attr("propvalids");//SKU值主键集合
 
 			alreadySetSkuVals[propvalids] = {
 				"skuPrice" : skuPrice,
+				"skuCostPrice" : skuCostPrice,
 				"skuStock" : skuStock
 			}
 		}
