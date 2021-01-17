@@ -6,7 +6,7 @@ namespace app\common\model\mysql;
 
 use think\Model;
 
-class Category extends Model
+class Category extends BaseModel
 {
     //    写入数据时自动写入创建时间和更新时间
     protected $autoWriteTimestamp = true;
@@ -38,8 +38,8 @@ class Category extends Model
             'status' => config("status.mysql.table_normal")
         ];
         $order = [
-            'listorder' => 'asc',
-            'id' => 'asc'
+            'listorder' => 'desc',
+            'id' => 'desc'
         ];
         $result = $this->where($where)
             ->field($fileds)
@@ -61,8 +61,8 @@ class Category extends Model
             'pid' => $data['pid'],
         ];
         $order = [
-            'listorder' => 'asc',
-            'id' => 'asc'
+            'listorder' => 'desc',
+            'id' => 'desc'
         ];
         $result = $this->where("status","<>",config("status.mysql.table_delete"))
             ->where($where)
@@ -176,8 +176,102 @@ class Category extends Model
             'status' => config("status.mysql.table_normal")
         ];
         $order = [
+            'listorder' => 'desc',
+            'id' => 'desc'
+        ];
+        $result = $this->where($where)
+            ->field($field)
+            ->order($order)
+            ->select();
+        return $result;
+    }
+
+    /**
+     * 根据ID获取首页栏目数据
+     * @param $categoryId
+     * @param $field
+     * @return array|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGoodsRecommendById($categoryId,$field){
+        $where = [
+            'id' => $categoryId,
+        ];
+        $order = [
+            'listorder' => 'desc',
+            'id' => 'desc'
+        ];
+        $result = $this->where($where)
+            ->field($field)
+            ->order($order)
+            ->find();
+        return $result;
+    }
+
+    /**
+     * 根据PID获取首页栏目数据
+     * @param $categoryPid
+     * @param $field
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGoodsRecommendByPid($categoryPid,$field){
+        $where = [
+            'pid' => $categoryPid,
+            'status' => config("status.mysql.table_normal")
+        ];
+        $order = [
             'listorder' => 'asc',
-            'id' => 'asc'
+            'id' => 'desc'
+        ];
+        $result = $this->where($where)
+            ->field($field)
+            ->order($order)
+            ->select();
+        return $result;
+    }
+
+    /**
+     * 根据id获取数据
+     * @param $id
+     * @param string $field
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getCategoryId($id, $field = "*") {
+        $where = [
+            "id" => $id,
+            "status" => config("status.mysql.table_normal")
+        ];
+        $result = $this->where($where)
+            ->field($field)
+            ->select();
+        return $result;
+    }
+
+    /**
+     * 根据二级栏目id获取三级栏目
+     * @param $id
+     * @param $field
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function sub($id,$field){
+        $where = [
+            'pid' => $id,
+            'status' => config("status.mysql.table_normal")
+        ];
+        $order = [
+            'listorder' => 'asc',
+            'id' => 'desc'
         ];
         $result = $this->where($where)
             ->field($field)

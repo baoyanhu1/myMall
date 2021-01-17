@@ -81,4 +81,60 @@ class Goods extends BaseModel
 //        return request()->domain().$value;
         return "http://localhost".$value;
     }
+
+    /**
+     * 按分类ID查询商品（当前用户首页栏目推荐商品）
+     * @param $categoryId
+     * @param $field
+     * @param int $limit
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGoodsByCategoryId($categoryId,$field,$limit = 10){
+        $order = [
+            "listorder" => "asc",
+            "id" => "desc"
+        ];
+        $where = [
+            "status" => config("status.mysql.table_normal"),
+        ];
+        $result = $this->whereFindInSet("category_path_id",$categoryId)
+            ->where($where)
+            ->field($field)
+            ->order($order)
+            ->limit($limit)
+            ->select();
+        return $result;
+    }
+
+    /**
+     * 按分类查询商品数据/按关键字搜索商品
+     * @param $categoryId
+     * @param $field
+     * @param $pageSize
+     * @param $order
+     * @return \think\Paginator
+     * @throws \think\db\exception\DbException
+     */
+    public function getGoodsLists($categoryId,$field,$pageSize,$order,$keywords){
+        $where = [
+            "status" => config("status.mysql.table_normal"),
+        ];
+        $res = $this;
+        if ($categoryId){
+            $res = $this->whereFindInSet("category_path_id",$categoryId);
+        }
+        if (!empty($keywords)){
+            $data = [
+                "title" => $keywords
+            ];
+            $res = $this->withSearch("title",$data);
+        }
+        $result = $res->where($where)
+            ->field($field)
+            ->order($order)
+            ->paginate($pageSize);
+        return $result;
+    }
 }

@@ -100,4 +100,68 @@ class Goods extends BusBase
         }
         return $result->toArray();
     }
+
+    /**
+     * 根据分类ID获取商品
+     * @param $categoryIds
+     * @return array
+     */
+    public function categoryGoodsRecommend($categoryIds){
+        if (!$categoryIds){
+            return [];
+        }
+        $result = [];
+//        获取分类栏目
+        $categoryBus = new Category();
+        foreach ($categoryIds as $key=>$categoryId){
+//            根据id获取顶级分类信息
+            $result[$key]['categorys'] = $categoryBus->getGoodsRecommendById($categoryId);
+//            根据PID获取二级分类信息
+            $result[$key]['categorys']['list'] = $categoryBus->getGoodsRecommendByPid($categoryId);
+        }
+
+//        获取分类下的商品
+        foreach ($categoryIds as $key=>$categoryId){
+            $result[$key]['goods'] = $this->getGoodsByCategoryId($categoryId);
+        }
+        return $result;
+    }
+
+    /**
+     * 根据分类ID获取商品
+     * @param $categoryId
+     * @return array
+     */
+    public function getGoodsByCategoryId($categoryId){
+        $field = "sku_id as id,title,price,recommend_image as image";
+        try {
+            $result = $this->model->getGoodsByCategoryId($categoryId,$field);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * 按分类查询商品数据/按关键字搜索商品
+     * @param $categoryId
+     * @param $pageSize
+     * @param $order
+     * @return array
+     */
+    public function getGoodsLists($categoryId,$pageSize,$order,$keywords){
+        $field = "sku_id as id,title,price,recommend_image as image,sales_count";
+        try {
+            $res = $this->model->getGoodsLists($categoryId,$field,$pageSize,$order,$keywords)->toArray();
+            $result = [];
+            $result['total_page_num'] = isset($res['per_page']) ? $res['per_page'] : 0;
+            $result['count'] = isset($res['total']) ? $res['total'] : 0;
+            $result['page'] = isset($res['current_page']) ? $res['current_page'] : 0;
+            $result['page_size'] = isset($pageSize) ? $pageSize : 10;
+            $result['list'] = isset($res['data']) ? $res['data'] : [];
+        }catch (Exception $e){
+            return [];
+        }
+        return $result;
+    }
 }

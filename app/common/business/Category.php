@@ -18,13 +18,46 @@ class Category
      * @param $data
      */
     public function add($data){
-        $data['status'] = config("status.mysql.table_normal");
-        $categoryInfo = $this->model->getCategoryInfo($data);
-        if ($categoryInfo && $categoryInfo['status'] != config("status.mysql.table_delete")){
-            throw new Exception("分类已存在");
+        $this->model->startTrans();
+        try {
+            $data['status'] = config("status.mysql.table_normal");
+            $name = $data['name'];
+            //获取他上级分类的path
+            $res = $this->model->getCategoryId($data['pid']);
+            $res = $res->toArray();
+
+
+            $categoryInfo = $this->model->getCategoryInfo($data);
+            if ($categoryInfo && $categoryInfo['status'] != config("status.mysql.table_delete")){
+                throw new Exception("分类已存在");
+            }
+            //首先保存分类名
+            $this->model->save($data);
+            //获取最后一个新增ID return $this->model->getLastInsID();
+            $id = $this->model->id;
+            if (!empty($res)){
+                $path = $res[0]["path"];
+                $path = $path.",".$id;
+                $data = [
+                    "path" => $path
+                ];
+            }else{
+                $path = $id;
+                $data = [
+                    "path" => $path
+                ];
+            }
+            //通过拼接path，再做一次更新
+            $this->model->updateById($id, $data);
+
+            //事务提交
+            $this->model->commit();
+            return $id;
+        } catch (\think\Exception $e) {
+            //事务回滚
+            $this->model->rollback();
+            throw new \think\Exception("服务内部异常");
         }
-        $this->model->save($data);
-        return $this->model->id;
     }
 
     /**
@@ -208,6 +241,99 @@ class Category
         $field = "id,name,pid";
         try {
             $result = $this->model->getCategoryByPid($pid,$field);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * 根据id获取首页栏目数据
+     * @param $id
+     */
+    public function getGoodsRecommendById($categoryId){
+        if (!$categoryId){
+            return [];
+        }
+        $field = "id as category_id,name,icon";
+        try {
+            $result = $this->model->getGoodsRecommendById($categoryId,$field);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * 根据PID获取首页栏目数据
+     * @param $categoryPid
+     * @return array
+     */
+    public function getGoodsRecommendByPid($categoryPid){
+        if (!$categoryPid){
+            return [];
+        }
+        $field = "id as category_id,name";
+        try {
+            $result = $this->model->getGoodsRecommendByPid($categoryPid,$field);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * 前端分类搜索
+     * @param $id
+     * @return array
+     */
+    public function search($id){
+        try {
+            $result = [];
+            $res = $this->model->getCategoryId($id)->toArray();
+            // 获取path值
+            $categoryPath = explode(",", $res[0]['path']);
+            //获取一级分类名称
+            $categoryOne = array_slice($categoryPath, 0, 1);
+
+            $result["name"] = $this->model
+                ->getCategoryId($categoryOne[0], "name")
+                ->toArray()[0]['name'];
+
+            //获取定位点focus_ids
+            $result["focus_ids"] = array_slice($categoryPath, 1);
+
+            foreach ($result['focus_ids'] as $key => $value) {
+                $result['focus_ids'][$key] = intval($value);
+            }
+            //获取子分类list
+            array_pop($categoryPath);
+            if (count($categoryPath) == 0) { //如果是一级分类则获取他下面的二级分类
+                $result['list'][0] = $this->model
+                    ->getCategoryByPid($categoryOne, "id, name")
+                    ->toArray();
+            } else { //如果是二级和三级分类，则获取同pid的所有分类
+                foreach ($categoryPath as $k => $v) {
+                    $result['list'][$k] = $this->model
+                        ->getCategoryByPid($v, "id, name")
+                        ->toArray();
+                }
+            }
+        } catch (\Exception $e) {
+            return [];
+        }
+        return $result;
+    }
+
+    /**
+     * 根据二级栏目id获取三级栏目
+     * @param $id
+     * @return array
+     */
+    public function sub($id){
+        $field = "id,name";
+        try {
+            $result = $this->model->sub($id,$field);
         }catch (Exception $e){
             return [];
         }
