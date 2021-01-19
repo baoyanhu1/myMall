@@ -26,8 +26,8 @@ class User
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function login($data){
-        cache(config("redis.code_pre")."17647643764","1234");
-        $redis_code = cache(config("redis.code_pre").$data['phone_number']);
+        cache(config("redis.code_phone")."17647643764","1234");
+        $redis_code = cache(config("redis.code_phone").$data['phone_number']);
         if (empty($redis_code) || $redis_code != $data['code']){
             throw new Exception("不存在该验证码",-1009);
         }

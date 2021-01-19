@@ -30,7 +30,7 @@ class Show
      * @param int $httpStatus
      * @return \think\response\Json
      */
-    public static function error($data = [],$status,$message = "error",$httpStatus = 200){
+    public static function error($data = [],$message = "error",$status,$httpStatus = 200){
         $result = [
             "status" => $status,
             "message" => $message,

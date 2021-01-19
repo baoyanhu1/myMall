@@ -19,7 +19,7 @@ class Specs extends Model
      * @throws \think\db\exception\DbException
      * @throws \think\db\exception\ModelNotFoundException
      */
-    public function getAllSpecs($field){
+    public function getAllSpecs($field = "*"){
         $where = [
             'status' => config('status.mysql.table_normal')
         ];
