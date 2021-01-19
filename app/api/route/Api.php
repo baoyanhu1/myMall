@@ -9,3 +9,5 @@ Route::resource('user','User');
 Route::rule('subcategory/:id','category/sub');
 //获取前端分类商品
 Route::rule('lists','mall.lists/index');
+//获取商品详情
+Route::rule('detail/:id','mall.detail/index');

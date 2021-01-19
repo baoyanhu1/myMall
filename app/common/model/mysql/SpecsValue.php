@@ -6,10 +6,8 @@ namespace app\common\model\mysql;
 
 use think\Model;
 
-class SpecsValue extends Model
+class SpecsValue extends BaseModel
 {
-    //    写入数据时自动写入创建时间和更新时间
-    protected $autoWriteTimestamp = true;
 
     /**
      * 根据规格id获取规格属性
@@ -83,4 +81,5 @@ class SpecsValue extends Model
         $result = $this->where($where)->save($data);
         return $result;
     }
+
 }

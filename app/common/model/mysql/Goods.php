@@ -83,6 +83,21 @@ class Goods extends BaseModel
     }
 
     /**
+     * 将查询出的轮播图循环带域名返回
+     * @param $value
+     * @return false|string[]
+     */
+    public function getCarouselImageAttr($value){
+        if (!empty($value)){
+            $value = explode(",",$value);
+            $value = array_map(function ($v){
+                return "http://localhost".$v;
+            },$value);
+        }
+        return $value;
+    }
+
+    /**
      * 按分类ID查询商品（当前用户首页栏目推荐商品）
      * @param $categoryId
      * @param $field

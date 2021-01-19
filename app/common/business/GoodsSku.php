@@ -40,6 +40,58 @@ class GoodsSku extends BusBase
         }catch (Exception $e){
             return false;
         }
+    }
 
+    /**
+     * 按skuId查询商品
+     * @param $skuId
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGoodsDetailBySkuId($skuId){
+        try {
+            $goodsDetail = $this->model->with("goods")->find($skuId);
+        }catch (Exception $e){
+            return [];
+        }
+
+        if (!$goodsDetail){
+            return [];
+        }
+        $result = $goodsDetail->toArray();
+        if ($result['status'] != config("status.mysql.table_normal")){
+            return [];
+        }
+        return $result;
+    }
+
+    /**
+     * 按商品ID获取所有sku数据
+     * @param $goodsId
+     * @return array
+     */
+    public function getSkusByGoodsId($goodsId){
+        try {
+            $result = $this->model->getSkusByGoodsId($goodsId);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * 根据skuids获取所有sku数据
+     * @param $ids
+     * @return array
+     */
+    public function getNormalInIds($ids){
+        try {
+            $result = $this->model->getNormalInIds($ids);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result->toArray();
     }
 }

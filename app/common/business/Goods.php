@@ -6,6 +6,7 @@ use app\common\lib\Arr;
 use app\common\model\mysql\Goods as GoodsModel;
 use app\common\business\GoodsSku as GoodsSkuBus;
 use think\Exception;
+use think\facade\Cache;
 
 class Goods extends BusBase
 {
@@ -162,6 +163,69 @@ class Goods extends BusBase
         }catch (Exception $e){
             return [];
         }
+        return $result;
+    }
+
+    /**
+     * 按skuId查询商品详情数据
+     * @param $skuID
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGoodsDetailBySkuId($skuID){
+        $goodsSkuBus = new GoodsSkuBus();
+//        按skuId获取商品详情
+        $goodsDetail = $goodsSkuBus->getGoodsDetailBySkuId($skuID);
+        if (!$goodsDetail){
+            return [];
+        }
+        if (!$goodsDetail['goods']){
+            return [];
+        }
+
+        $goods = $goodsDetail['goods'];
+//        按商品id获取所有sku数据
+        $skus = $goodsSkuBus->getSkusByGoodsId($goods['id']);
+        if (!$skus){
+            return [];
+        }
+        $gids = array_column($skus,"id","specs_value_ids");
+//        用当前skuId获取规格属性（返回flag标记：用作高亮显示）
+        $flagValue = "";
+        foreach ($gids as $k => $value){
+            if ($value == $skuID){
+                $flagValue = $k;
+            }
+        }
+
+//        获取当前商品的sku
+        $specsValueBus = new SpecsValue();
+        if ($goods['goods_specs_type'] == 1){
+            $sku = [];
+        }else{
+            $sku = $specsValueBus->getSpecsValueById($gids,$flagValue);
+        }
+
+        $result['title'] = $goods['title'];
+        $result['price'] = $goodsDetail['price'];
+        $result['cost_price'] = $goodsDetail['cost_price'];
+        $result['sales_count'] = $goods['sales_count'];
+        $result['stock'] = $goodsDetail['stock'];
+        $result['gids'] = $gids;
+        $result['image'] = $goods['carousel_image'];
+        $result['sku'] = $sku;
+        $result['detail'] = [
+            "d1" => [
+                "商品编号"=>$goodsDetail['id'],
+                "上架时间"=>$goods['create_time'],
+                "商品库存"=>$goodsDetail['stock'],
+            ],
+            "d2" => preg_replace('/(<img .*?src=")(.*?)/','$1'.'http://localhost'.'$2',$goods['description'])
+        ];
+//        使用redis记录用户浏览商品详情PV统计
+        Cache::inc(config("redis.mall_pv").$goods['id']);
         return $result;
     }
 }

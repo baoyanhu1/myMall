@@ -43,7 +43,7 @@ class Category extends ApiBase
         $categoryVil = new CategoryVil();
         $check = $categoryVil->scene("search")->check($data);
         if (!$check){
-            return Show::error([],config("status.error"),$categoryVil->getError());
+            return Show::error([],$categoryVil->getError());
         }
         $categoryBus = new CategoryBus();
         $category = $categoryBus->search($id);
@@ -63,7 +63,7 @@ class Category extends ApiBase
         $categoryVil = new CategoryVil();
         $check = $categoryVil->scene("search")->check($data);
         if (!$check){
-            return Show::error([],config("status.error"),$categoryVil->getError());
+            return Show::error([],$categoryVil->getError());
         }
         $categoryBus = new CategoryBus();
         $result = $categoryBus->sub($id);

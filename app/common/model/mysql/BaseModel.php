@@ -25,4 +25,19 @@ class BaseModel extends Model
         $result = $this->where($where)->save($data);
         return $result;
     }
+
+    /**
+     * 按规格属性ID获取规格属性信息
+     * @param $specsId
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getNormalInIds($specsId){
+        $result = $this->whereIn("id",$specsId)
+            ->where("status",config("status.mysql.table_normal"))
+            ->select();
+        return $result;
+    }
 }
