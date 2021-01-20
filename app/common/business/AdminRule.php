@@ -3,25 +3,35 @@ namespace app\common\business;
 
 
 use app\common\lib\Tree;
-use app\common\model\mysql\AdminRule;
+use app\common\model\mysql\AdminRule as AdminRuleModel;
 use think\Exception;
 
-class Rule
+class AdminRule extends BusBase
 {
-    public $sidebarObj;
+    public $model;
     public function __construct()
     {
-        $this->sidebarObj = new AdminRule();
+        $this->model = new AdminRuleModel();
     }
 
     /**
      * 侧边栏展示
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
      */
-    public function show()
+    public function Menu()
     {
-        $info = $this->sidebarObj->getSidebarInfo();
+        $fidle = 'id,title,pid,icon,href,target';
+        try {
+            $info = $this->model->getAllPermissions($fidle);
+        }catch (Exception $e){
+            return [];
+        }
+        $arrayInfo = $info->toArray();
         $tree = new Tree();
-        $showTree = $tree->getTree($info,'id','child');
+        $showTree = $tree->getTree($arrayInfo,'id','child');
         $menu = [
             "clearInfo"=> [
                 "clearUrl"=> "api/clear.json"
