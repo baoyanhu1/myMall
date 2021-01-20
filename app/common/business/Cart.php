@@ -57,10 +57,16 @@ class Cart extends BusBase
      * @return array
      * @throws Exception
      */
-    public function Lists($userId){
+    public function Lists($userId,$ids){
         try {
-//            获取当前用户购物车数据
-            $allCart = Cache::hGetAll(Key::cartKey($userId));
+            if ($ids){
+//                购物车选中商品到结算页面的商品数据
+                $ids = explode(",",$ids);
+                $allCart = Cache::hMget(Key::cartKey($userId),$ids);
+            }else{
+                //            获取当前用户购物车数据
+                $allCart = Cache::hGetAll(Key::cartKey($userId));
+            }
         }catch (Exception $e){
             return [];
         }

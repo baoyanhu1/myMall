@@ -42,8 +42,9 @@ class Cart extends AuthBase
      * @return \think\response\Json
      */
     public function Lists(){
+        $ids = input("param.id","","trim");
         $cartBus = new CartBus();
-        $result = $cartBus->Lists($this->user_id);
+        $result = $cartBus->Lists($this->user_id,$ids);
         if (!$result){
             return Show::error();
         }
