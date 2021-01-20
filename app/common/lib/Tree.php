@@ -9,16 +9,18 @@ class Tree
     /**
      * 树状无限分类
      * @param $data
+     * @param $id //父ID
+     * @param $list
      */
-    public static function getTree($data){
+    public static function getTree($data,$id = "category_id",$list = "list"){
         $items = [];
         foreach ($data as $v){
-            $items[$v['category_id']] = $v;
+            $items[$v[$id]] = $v;
         }
         $tree = [];
         foreach ($items as $k=>$item){
             if (isset($items[$item['pid']])){
-                $items[$item['pid']]['list'][] = &$items[$k];
+                $items[$item['pid']][$list][] = &$items[$k];
             }else{
                 $tree[] = &$items[$k];
             }

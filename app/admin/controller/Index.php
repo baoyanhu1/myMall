@@ -3,6 +3,7 @@
 
 namespace app\admin\controller;
 
+use app\common\business\Rule;
 use think\facade\View;
 
 class Index extends AdminBase
@@ -49,13 +50,13 @@ class Index extends AdminBase
                             "child"=> [
                                 [
                                     "title"=> "商品列表",
-                                    "href"=> "page/goods-list.html",
+                                    "href"=> "/admin/goods",
                                     "icon"=> "fa fa-list-alt",
                                     "target"=> "_self"
                                 ],
                                 [
                                     "title"=> "商品添加",
-                                    "href"=> "page/goods-add.html",
+                                    "href"=> "/admin/goods/add",
                                     "icon"=> "fa fa-navicon",
                                     "target"=> "_self"
                                 ]
@@ -68,9 +69,9 @@ class Index extends AdminBase
 
 
         ];
-
-
-        return json_encode($menu);
+        $obj = new Rule();
+        $sidebar = $obj->show();
+        return $sidebar;
     }
 
     /**
