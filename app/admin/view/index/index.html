@@ -90,8 +90,8 @@
             element = layui.element,
             layer = layui.layer;
 
-        layuimini.init('{__STATIC__}admin/api/init.json'); // 左菜单数据
-        //  layuimini.init("{:url('getMenu')}"); // 左菜单数据
+        //layuimini.init('{__STATIC__}admin/api/init.json'); // 左菜单数据
+          layuimini.init("{:url('getMenu')}"); // 左菜单数据
 
         $('.login-out').on("click", function () {
             layer.msg('退出登录成功', function () {
