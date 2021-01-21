@@ -30,4 +30,5 @@ class GoodsSku extends BaseModel
         $result = $this->where($where)->select();
         return $result;
     }
+
 }

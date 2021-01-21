@@ -29,8 +29,13 @@ class Cart extends AuthBase
             return Show::error([],$cartVil->getError());
         }
         $cartBus = new CartBus();
-//        购物车数据存入Redis
-        $result = $cartBus->insertRedis($this->user_id,$id,$num);
+        try {
+            //        购物车数据存入Redis
+            $result = $cartBus->insertRedis($this->user_id,$id,$num);
+        }catch (Exception $e){
+            return Show::error([],$e->getMessage());
+        }
+
         if ($result === FALSE){
             return Show::error([],"加入购物车失败");
         }
@@ -44,7 +49,12 @@ class Cart extends AuthBase
     public function Lists(){
         $ids = input("param.id","","trim");
         $cartBus = new CartBus();
-        $result = $cartBus->Lists($this->user_id,$ids);
+        try {
+            $result = $cartBus->Lists($this->user_id,$ids);
+        }catch (Exception $e){
+            return Show::error([],$e->getMessage());
+        }
+
         if (!$result){
             return Show::error();
         }

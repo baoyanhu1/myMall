@@ -42,11 +42,15 @@ class Cart extends BusBase
 //                将Redis内得到的json字符串转换成数组，json_decode第二个参数默认为false返回对象，true返回数组
                 $cart = json_decode($cart,true);
                 $data['num'] = $data['num'] + $cart['num'];
+//                判断当前sku库存是否不足
+                if ($goodsSku['stock'] < $data['num']){
+                    throw new Exception($goodsSku['goods']['title']."商品库存不足");
+                }
             }
 //            将购物车数据存入Redis
             $result = Cache::hSet(Key::cartKey($userId),$id,json_encode($data));
         }catch (Exception $e){
-            return FALSE;
+            throw new Exception($e->getMessage());
         }
         return $result;
     }
@@ -81,12 +85,20 @@ class Cart extends BusBase
         $specsValueBus = new SpecsValue();
         $specsValues = $specsValueBus->dealSpecsValues($specsValuIds);
 
+//        获取商品库存
+        $stock = array_column($skus,"stock","id");
+
         $result = [];
         foreach ($allCart as $k => $cart){
             $cart = json_decode($cart,true);
+            if ($ids && isset($stock[$k]) && $stock[$k] < $cart['num']){
+                throw new Exception($cart['title']."商品库存不足");
+            }
+            $price = $skuPrice[$k] ?? 0.00;
             $cart['id'] = $k;
             $cart['image'] = preg_match('/http:\/\//',$cart['image']) ? $cart['image'] : "http://localhost".$cart['image'];
-            $cart['price'] = $skuPrice[$k] ?? 0.00;
+            $cart['price'] = $price;
+            $cart['total_price'] = $price * $cart['num'];
             $cart['sku'] = $specsValues[$k] ?? "暂无规格";
             $result[] = $cart;
         }
@@ -103,9 +115,13 @@ class Cart extends BusBase
      * @param $id
      * @return bool
      */
-    public function delete($userId,$id){
+    public function delete($userId,$ids){
+        if (!is_array($ids)){
+            $ids = explode(",",$ids);
+        }
         try {
-            $result = Cache::hDel(Key::cartKey($userId),$id);
+//            ...为php可变参数（例：传入的数组为[1,2,3]使用...后为1,2,3传入）
+            $result = Cache::hDel(Key::cartKey($userId),...$ids);
         }catch (Exception $e){
             return FALSE;
         }
@@ -122,7 +138,11 @@ class Cart extends BusBase
      */
     public function update($userId,$id,$num){
         try {
+//            获取Redis内商品sku数据
             $cart = Cache::hGet(Key::cartKey($userId),$id);
+//            获取商品sku数据（主要获取库存判断库存量是否不足）
+            $goodsSkuBus = new GoodsSku();
+            $goodsSku = $goodsSkuBus->getGoodsDetailBySkuId($id);
         }catch (Exception $e){
             return FALSE;
         }
@@ -131,10 +151,15 @@ class Cart extends BusBase
         }
         try {
             $cart = json_decode($cart,true);
+//            判断库存是否不足      并且判断如果是加购物车操作
+            if ($goodsSku['stock'] < $num && $cart['num'] < $num){
+                throw new Exception($goodsSku['goods']['title']."商品库存不足");
+            }
+//            修改Redis内缓存商品数量
             $cart['num'] = $num;
             Cache::hSet(Key::cartKey($userId),$id,json_encode($cart));
         }catch (Exception $e){
-            return FALSE;
+            throw new Exception($e->getMessage());
         }
         return true;
     }
