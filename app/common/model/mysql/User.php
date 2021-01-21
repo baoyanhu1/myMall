@@ -78,4 +78,6 @@ class User extends Model
         $result = $this->where($where)->find();
         return $result;
     }
+
+
 }
