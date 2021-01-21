@@ -6,7 +6,7 @@ namespace app\common\model\mysql;
 
 use think\Model;
 
-class AdminUser extends Model
+class AdminUser extends BaseModel
 {
     /**
      * 根据用户名获取后台管理用户信息
@@ -43,5 +43,26 @@ class AdminUser extends Model
         ];
         $result = $this->where($where)->save($data);
         return $result;
+    }
+
+    /**
+     * 用户信息
+     * @param string $status
+     * @param $num
+     * @return \think\Paginator
+     * @throws \think\db\exception\DbException
+     */
+    public function getUserInfo($num,$status = "")
+    {
+        $status = !empty($status) ? $status : config("status.mysql.table_normal");
+        $where = [
+            'status' => $status
+        ];
+        $order = [
+            'id' => 'desc'
+        ];
+        return $this->where($where)
+            ->order($order)
+            ->paginate($num);
     }
 }
