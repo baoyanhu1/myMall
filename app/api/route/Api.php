@@ -11,3 +11,5 @@ Route::rule('subcategory/:id','category/sub');
 Route::rule('lists','mall.lists/index');
 //获取商品详情
 Route::rule('detail/:id','mall.detail/index');
+//创建订单
+Route::resource("order","order.index");

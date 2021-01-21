@@ -40,4 +40,23 @@ class BaseModel extends Model
             ->select();
         return $result;
     }
+
+    /**
+     * 自定义条件获取数据
+     * @param array $condition
+     * @param string[] $order
+     * @return bool|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getByCondition($condition = [],$order = ["id" => "desc"]){
+        if (!$condition || !is_array($condition)){
+            return false;
+        }
+        $result = $this->where($condition)
+            ->order($order)
+            ->select();
+        return $result;
+    }
 }

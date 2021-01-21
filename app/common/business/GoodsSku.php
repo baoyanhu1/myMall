@@ -94,4 +94,56 @@ class GoodsSku extends BusBase
         }
         return $result->toArray();
     }
+
+    /**
+     * 更新商品SKU库存
+     * @param $data
+     * @return array|\think\Collection
+     * @throws \Exception
+     */
+    public function updateStock($data){
+//        先获取要减库存的商品
+        $ids = array_keys($data);
+        try {
+            $goodsSku = $this->getNormalInIds($ids);
+            $goodsSkuStock = array_column($goodsSku,"stock","id");
+//        循环减库存
+            foreach ($goodsSkuStock as $k => $value){
+                $goodsSkuStock[$k] = $goodsSkuStock[$k] - $data[$k];
+            }
+            $res = [];
+            foreach ($ids as $id){
+                $res[] = [
+                    "id" => $id,
+                    "stock" => $goodsSkuStock[$id]
+                ];
+            }
+            $result = $this->model->saveAll($res);
+        }catch (Exception $e){
+            return [];
+        }
+        return $result;
+    }
+
+    /**
+     * 按商品ids获取商品sku总库存
+     * @param $goodsIds
+     * @return array
+     */
+    public function sumStock($goodsIds){
+        $res = [];
+        try {
+            foreach ($goodsIds as $ids){
+                $sku = $this->getSkusByGoodsId($ids);
+                $stock = array_sum(array_column($sku,"stock"));
+                $res[] = [
+                    "id" => $ids,
+                    "stock" => $stock
+                ];
+            }
+        }catch (Exception $e){
+            return [];
+        }
+        return $res;
+    }
 }

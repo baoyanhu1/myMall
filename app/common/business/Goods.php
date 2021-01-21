@@ -228,4 +228,19 @@ class Goods extends BusBase
         Cache::inc(config("redis.mall_pv").$goods['id']);
         return $result;
     }
+
+    /**
+     * 更新商品库存
+     * @param $sumStock
+     * @return bool|\think\Collection
+     * @throws \Exception
+     */
+    public function updateStock($sumStock){
+        try {
+            $result = $this->model->saveAll($sumStock);
+        }catch (Exception $e){
+            return false;
+        }
+        return $result;
+    }
 }
