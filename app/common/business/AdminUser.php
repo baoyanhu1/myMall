@@ -26,4 +26,15 @@ class AdminUser extends BusBase
         $toArray = $info->toArray();
         return $toArray;
     }
+
+    /**
+     * 提交用户信息
+     * @param $name
+     * @param $password
+     * @param $pass
+     */
+    public function setSave($name,$password,$pass)
+    {
+
+    }
 }

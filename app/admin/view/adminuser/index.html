@@ -75,13 +75,10 @@
                     <td>
                         {$vo.operate_user}
                     </td>
-
                     <td data-id="{$vo.id}"><input type="checkbox" {if $vo.status == 1}checked {/if} name="status" lay-skin="switch"
                         lay-filter="switchStatus"
                         lay-text="ON|OFF">
                     </td>
-
-
                     <td>
                         <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete del-child" data-ptype="1"
                            lay-event="delete" data-id="{$vo.id}}">删除</a>
@@ -124,7 +121,7 @@
             , curr: {$UserInfo.current_page}
             , jump: function (obj,first) {
                 if (!first){
-                    location.href="?page="+obj.curr+"&pid=1"
+                    // location.href="?page="+obj.curr+"&pid=1"
                 }
             }
         });
@@ -132,13 +129,13 @@
 
         // 添加 分类
         $('.add').on('click', function () {
-            layObj.dialog("{:url('add')}",'添加分类')
+            layObj.dialog("{:url('add')}",'添加用户')
         });
 
         // 编辑 分类
         $('.edit').on('click', function () {
             let id = $(this).attr('data-id');
-            layObj.dialog("{:url('edit')}?id="+id,'编辑分类')
+            layObj.dialog("{:url('edit')}?id="+id,'编辑用户')
         });
 
         //监听状态 更改
