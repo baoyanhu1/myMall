@@ -96,7 +96,7 @@ class Cart extends BusBase
             }
             $price = $skuPrice[$k] ?? 0.00;
             $cart['id'] = $k;
-            $cart['image'] = preg_match('/http:\/\//',$cart['image']) ? $cart['image'] : "http://localhost".$cart['image'];
+//            $cart['image'] = $cart['image'];
             $cart['price'] = $price;
             $cart['total_price'] = $price * $cart['num'];
             $cart['sku'] = $specsValues[$k] ?? "暂无规格";

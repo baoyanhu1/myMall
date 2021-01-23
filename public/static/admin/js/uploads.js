@@ -72,8 +72,21 @@ layui.use(['upload'], function () {
             // $("input[name='banner_img']").each(function(){
             //     img_url.push($(this).val());
             // })
-
-            $(this).parent().remove()
+            //获取当前删除的图片地址
+            var s = $(this).prev();
+            var sr = s.attr("src");
+            var u = "deleteIamge";
+            let data = {src: sr}
+            console.log(u)
+            // 发送ajax请求
+            layObj.post(u, data, (res) => {
+                if (res.status == 1) {
+                    $(this).parent().remove()
+                } else {
+                    layer.msg(res.message);
+                }
+                // $(this).parent().remove()
+            })
         })
 
 

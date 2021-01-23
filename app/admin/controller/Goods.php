@@ -4,9 +4,12 @@
 namespace app\admin\controller;
 
 
+use app\common\lib\Oss;
+use app\common\lib\Show;
 use think\Exception;
 use think\facade\View;
 use app\common\business\Goods as GoodsBus;
+use app\admin\validate\Goods as GoodsVil;
 
 class Goods extends AdminBase
 {
@@ -73,5 +76,33 @@ class Goods extends AdminBase
 
         return show(config("status.success"),"商品新增成功");
 
+    }
+
+    /**
+     * 删除图片
+     * @return \think\response\Json
+     */
+    public function deleteIamge(){
+        $image = input("param.src","","trim");
+        $data = [
+            "src" => $image
+        ];
+        $goodsVil = new GoodsVil();
+        $check = $goodsVil->scene("deleteImage")->check($data);
+        if (!$check){
+            return Show::error([],$goodsVil->getError());
+        }
+        $ossObj = new Oss();
+        try {
+            $image = explode("/",$image);
+            $image = end($image);
+            $result = $ossObj->delete($image);
+            if ($result['status'] == 0){
+                return Show::error([],"删除失败");
+            }
+        }catch (Exception $e){
+            return Show::error([],"删除失败");
+        }
+        return Show::success($result);
     }
 }

@@ -54,15 +54,39 @@ class AdminUser extends BaseModel
      */
     public function getUserInfo($num,$status = "")
     {
-        $status = !empty($status) ? $status : config("status.mysql.table_normal");
+        $statusNormal = !empty($status) ? $status : config("status.mysql.table_normal");
+        $statusPending = !empty($status) ? $status : config("status.mysql.table_pending");
         $where = [
-            'status' => $status
+            'status' => [$statusNormal,$statusPending]
         ];
         $order = [
-            'id' => 'desc'
+            'id' => 'ASC'
         ];
         return $this->where($where)
             ->order($order)
             ->paginate($num);
     }
+
+    /**
+     * 提交用户信息
+     * @param $username
+     * @param $password
+     * @param $isUser
+     */
+    public function setSave($username,$password,$isUser)
+    {
+        $data = [
+            "username" => $username,
+            "password" => $password,
+            "status" => config('status.mysql.table_normal'),
+            "create_time" => time(),
+            "update_time" => time(),
+            "last_login_time" => "",
+            "last_login_ip" => "",
+            "operate_user" => $isUser
+        ];
+
+        return $this->insert($data);
+    }
+
 }
