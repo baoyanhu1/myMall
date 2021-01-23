@@ -121,7 +121,7 @@
             , curr: {$UserInfo.current_page}
             , jump: function (obj,first) {
                 if (!first){
-                    // location.href="?page="+obj.curr+"&pid=1"
+                    location.href="?page="+obj.curr+"&pid=1"
                 }
             }
         });
@@ -147,11 +147,8 @@
             $.ajax({
                 url: '{:url("changeStatus")}?id=' + id + '&status=' + status,
                 success: (res) => {
-                    if (res.status == 1){
-                        window.location.reload();
-                    }else {
-                        layer.msg(res.message)
-                    }
+                    layer.msg(res.message,{time:1000})
+                   // window.location.reload();
                 }
             });
             return false;

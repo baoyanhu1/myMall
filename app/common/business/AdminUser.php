@@ -29,12 +29,45 @@ class AdminUser extends BusBase
 
     /**
      * 提交用户信息
-     * @param $name
-     * @param $password
-     * @param $pass
+     * @param $data
+     * @param $isUser
      */
-    public function setSave($name,$password,$pass)
+    public function setSave($data,$isUser)
     {
+        $pass = phpass($data['password']);
+        try {
+            return $this->model->setSave($data['username'],$pass,$isUser);
+        }catch (Exception $e){
+            return [];
+        }
 
     }
+
+    /**
+     * 根据用户名获取后台管理用户信息
+     * @param $username
+     * @return array|bool|\think\Model|null
+     */
+    public function getAdminUserByUserName($username)
+    {
+        try {
+            return $this->model->getAdminUserByUserName($username);
+        }catch (Exception $e){
+            return [];
+        }
+    }
+
+    /**
+     * 更改管理员状态
+     * @param $data
+     * @param $id
+     */
+   public function changeStatus($id,$data)
+   {
+       try {
+           return $this->model->updateById($id,$data);
+       }catch (Exception $e){
+           return [];
+       }
+   }
 }

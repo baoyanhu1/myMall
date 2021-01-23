@@ -45,7 +45,7 @@ class Login extends AdminBase
         ];
 //        内置validate数据验证
         $validate = new \app\admin\validate\AdminUser();
-        $check = $validate->check($data);
+        $check = $validate->scene('login')->check($data);
         if (!$check) {
             return show(config("status.error"), $validate->getError());
         }
