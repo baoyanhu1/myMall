@@ -5,6 +5,7 @@ namespace app\api\controller;
 
 
 use app\common\business\Goods as GoodsBus;
+use app\common\lib\Curl;
 use app\common\lib\Show;
 
 class Index extends ApiBase

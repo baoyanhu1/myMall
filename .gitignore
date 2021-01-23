@@ -1,4 +1,5 @@
 /.idea
+/config/aliyun.php
 /.vscode
 /vendor
 *.log

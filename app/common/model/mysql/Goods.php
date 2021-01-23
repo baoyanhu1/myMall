@@ -73,29 +73,29 @@ class Goods extends BaseModel
     }
 
     /**
-     * 将查询出的图片地址带域名返回
+     * 将查询出的图片地址带域名返回(现图片已存入oss)
      * @param $value
      * @return string
      */
-    public function getImageAttr($value){
-//        return request()->domain().$value;
-        return "http://localhost".$value;
-    }
+//    public function getImageAttr($value){
+////        return request()->domain().$value;
+//        return "http://localhost".$value;
+//    }
 
     /**
-     * 将查询出的轮播图循环带域名返回
+     * 将查询出的轮播图循环带域名返回(现图片已存入oss)
      * @param $value
      * @return false|string[]
      */
-    public function getCarouselImageAttr($value){
-        if (!empty($value)){
-            $value = explode(",",$value);
-            $value = array_map(function ($v){
-                return "http://localhost".$v;
-            },$value);
-        }
-        return $value;
-    }
+//    public function getCarouselImageAttr($value){
+//        if (!empty($value)){
+//            $value = explode(",",$value);
+//            $value = array_map(function ($v){
+//                return "http://localhost".$v;
+//            },$value);
+//        }
+//        return $value;
+//    }
 
     /**
      * 按分类ID查询商品（当前用户首页栏目推荐商品）

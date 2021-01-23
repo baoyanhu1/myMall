@@ -214,7 +214,7 @@ class Goods extends BusBase
         $result['sales_count'] = $goods['sales_count'];
         $result['stock'] = $goodsDetail['stock'];
         $result['gids'] = $gids;
-        $result['image'] = $goods['carousel_image'];
+        $result['image'] = explode(",",$goods['carousel_image']);
         $result['sku'] = $sku;
         $result['detail'] = [
             "d1" => [
@@ -222,7 +222,8 @@ class Goods extends BusBase
                 "上架时间"=>$goods['create_time'],
                 "商品库存"=>$goodsDetail['stock'],
             ],
-            "d2" => preg_replace('/(<img .*?src=")(.*?)/','$1'.'http://localhost'.'$2',$goods['description'])
+//            "d2" => preg_replace('/(<img .*?src=")(.*?)/','$1'.'http://localhost'.'$2',$goods['description'])
+            "d2" => $goods['description']
         ];
 //        使用redis记录用户浏览商品详情PV统计
         Cache::inc(config("redis.mall_pv").$goods['id']);
