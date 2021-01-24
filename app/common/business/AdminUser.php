@@ -34,9 +34,18 @@ class AdminUser extends BusBase
      */
     public function setSave($data,$isUser)
     {
-        $pass = phpass($data['password']);
+        $data = [
+            "username" => $data['username'],
+            "password" => phpass($data['password']),
+            "status" => config('status.mysql.table_normal'),
+            "create_time" => time(),
+            "update_time" => time(),
+            "last_login_time" => "",
+            "last_login_ip" => "",
+            "operate_user" => $isUser
+        ];
         try {
-            return $this->model->setSave($data['username'],$pass,$isUser);
+            return $this->model->setSave($data);
         }catch (Exception $e){
             return [];
         }
@@ -64,10 +73,46 @@ class AdminUser extends BusBase
      */
    public function changeStatus($id,$data)
    {
+
        try {
            return $this->model->updateById($id,$data);
        }catch (Exception $e){
            return [];
        }
    }
+
+    /**
+     * 根据主键ID查询管理员名称
+     * @param $id
+     * @return array|\think\Model|null
+     */
+   public function getAdminUserById($id)
+   {
+       try {
+           return $this->model->getAdminUserById($id);
+       }catch (Exception $e){
+           return [];
+       }
+   }
+
+   /**
+    * 编辑管理员信息
+     * @param $id
+     * @param $data
+     * @param $isUser
+     */
+   public function edit($id,$data,$isUser)
+   {
+       $data = [
+           "password" => phpass($data),
+           "update_time" => time(),
+           "operate_user" => $isUser
+       ];
+       try {
+           return $this->model->updateById($id,$data);
+       }catch (Exception $e){
+           return [];
+       }
+   }
+
 }

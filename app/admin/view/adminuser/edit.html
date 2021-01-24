@@ -5,19 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>添加管理用户</title>
+    <title>编辑管理员</title>
     <link rel="stylesheet" href="{__STATIC__}admin/lib/layui-v2.5.4/css/layui.css" media="all">
     <link rel="stylesheet" href="{__STATIC__}admin/css/public.css" media="all">
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>后台用户管理</legend>
+    <legend>管理员信息</legend>
 </fieldset>
+
 <form class="layui-form" action="">
     <div class="layui-form-item">
         <label class="layui-form-label">账号</label>
-        <div class="layui-input-block">
-            <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="请输入账号" class="layui-input">
+        <div class="layui-input-block layui-disabled">
+            <input type="text" name="id" lay-verify="id" style="display:none" autocomplete="off" value="{$id}" placeholder="{$id}" class="layui-input layui-disabled">
+            <div class="layui-form-mid layui-word-aux">{$username}</div>
         </div>
     </div>
     <div class="layui-form-item">
@@ -44,7 +46,7 @@
 <script src="{__STATIC__}admin/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 <script src="{__STATIC__}admin/js/common.js" charset="utf-8"></script>
 <script>
-    layui.use(['form'], function() {
+    layui.use(['form','laypage'], function () {
         var form = layui.form;
         //监听提交
         form.on('submit(demo1)', function(data){
@@ -52,7 +54,7 @@
             $.ajax({
                 type:'POST',
                 data:data.field,
-                url: '{:url("save")}',
+                url: '{:url("editSave")}',
                 success: (res) => {
                     if (res.status == '0')
                     {
@@ -70,8 +72,7 @@
             // window.location.reload()
             return false;
         });
-    });
+    })
 </script>
-
 </body>
 </html>

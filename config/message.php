@@ -10,6 +10,10 @@ return [
         "AddFailed" => "增加失败",
         "DuplicateData" => "用户名重复",
         "StatusModificationFailed" => "状态修改失败",
-        "StatusModifiedSuccessfully" => "状态修改成功"
+        "StatusModifiedSuccessfully" => "状态修改成功",
+        "AdministratorDeleteFailed" => "管理员删除失败",
+        "AdministratorDeletedSuccessfully" => "管理员删除成功",
+        "EditedSuccessfully" => "编辑成功",
+        "EditFailed" => "编辑失败"
     ]
 ];

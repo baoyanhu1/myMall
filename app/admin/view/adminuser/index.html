@@ -75,6 +75,18 @@
                     <td>
                         {$vo.operate_user}
                     </td>
+                    {if $vo.id == "1"}
+                    <td data-id="{$vo.id}"><input type="checkbox" {if $vo.status == 1}checked {/if} name="status" lay-skin="switch" disabled
+                        lay-filter="switchStatus"
+                        lay-text="ON|OFF">
+                    </td>
+                    <td>
+                        <a class="layui-btn layui-btn-xs layui-btn-danger  layui-btn-disabled" data-ptype="1"
+                           lay-event="delete" data-id="">删除</a>
+                        <a class="layui-btn layui-btn-xs layui-btn-warm  layui-btn-disabled" data-ptype="1"
+                           lay-event="edit" data-id="">更改密码</a>
+                    </td>
+                    {else}
                     <td data-id="{$vo.id}"><input type="checkbox" {if $vo.status == 1}checked {/if} name="status" lay-skin="switch"
                         lay-filter="switchStatus"
                         lay-text="ON|OFF">
@@ -83,8 +95,11 @@
                         <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete del-child" data-ptype="1"
                            lay-event="delete" data-id="{$vo.id}}">删除</a>
                         <a class="layui-btn layui-btn-xs layui-btn-warm data-count-delete edit" data-ptype="1"
-                           lay-event="edit" data-id="{$vo.id}}">编辑</a>
+                           lay-event="edit" data-id="{$vo.id}}">更改密码</a>
+                        <a class="layui-btn layui-btn-xs layui-btn-normal power" data-ptype="1"
+                           lay-event="power" data-id="{$vo.id}}">修改权限</a>
                     </td>
+                    {/if}
                 </tr>
                 {/foreach}
                 <!--一级类目循环 end-->
@@ -127,15 +142,21 @@
         });
 
 
-        // 添加 分类
+        // 添加用户
         $('.add').on('click', function () {
-            layObj.dialog("{:url('add')}",'添加用户')
+            layObj.dialog("{:url('add')}",'添加管理员')
         });
 
-        // 编辑 分类
+        // 编辑用户
         $('.edit').on('click', function () {
             let id = $(this).attr('data-id');
-            layObj.dialog("{:url('edit')}?id="+id,'编辑用户')
+            layObj.dialog("{:url('edit')}?id="+id,'编辑')
+        });
+
+        // 更改权限
+        $('.power').on('click', function () {
+            let id = $(this).attr('data-id');
+            layObj.dialog("{:url('power')}?id="+id,'更改')
         });
 
         //监听状态 更改
@@ -183,13 +204,13 @@
         $('.del-child').on('click', function () {
             let id = $(this).attr('data-id'); // fu
 
-            layObj.box(`是否删除当前分类`, () => {
-                let   url = '{:url("del")}?id=' + id
+            layObj.box(`是否删除此管理员`, () => {
+                let   url = '{:url("del")}?id=' + id +'&status=' + '-1'
                 layObj.get(url,  (res) =>{
                     if (res.status == 1){
                         window.location.reload();
                     }else {
-                        layer.msg(res.message)
+                        layer.msg(res.message,{time:1000})
                     }
                 })
 
