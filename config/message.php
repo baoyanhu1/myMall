@@ -15,5 +15,12 @@ return [
         "AdministratorDeletedSuccessfully" => "管理员删除成功",
         "EditedSuccessfully" => "编辑成功",
         "EditFailed" => "编辑失败"
+    ],
+    //AdminRole 层
+    "AdminRole" => [
+        "DuplicateRoleName" => "角色名称重复",
+        "FailedToAddRole" => "角色添加失败",
+        "RoleAddedSuccessfully" => "角色添加成功"
     ]
+
 ];

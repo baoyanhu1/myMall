@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加角色</title>
+    <link rel="stylesheet" href="{__STATIC__}admin/lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" href="{__STATIC__}admin/css/public.css" media="all">
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>角色管理</legend>
+</fieldset>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入角色名称" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="{__STATIC__}admin/lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+<script src="{__STATIC__}admin/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="{__STATIC__}admin/js/common.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function() {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+
+            $.ajax({
+                type:'POST',
+                data:data.field,
+                url: '{:url("save")}',
+                success: (res) => {
+                    if (res.status == '0')
+                    {
+                        layer.msg(res.message,{time:1000})
+                        return false;
+                    }
+                    //延迟关闭
+                    layer.msg(res.message,{time:1000},function () {
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index)
+                    })
+                    //setTimeout('window.location.reload()',1000);
+                }
+            })
+            // window.location.reload()
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>
