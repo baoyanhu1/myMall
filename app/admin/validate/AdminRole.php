@@ -7,6 +7,8 @@ class AdminRole extends Validate
 {
     protected $rule = [
         "name" => "require",
+        "id" => "require",
+        "status" => "require",
     ];
 
     protected $message = [
@@ -17,5 +19,11 @@ class AdminRole extends Validate
     public function sceneRole()
     {
         return $this->only(['name']);
+    }
+
+    // status 验证场景定义
+    public function sceneStatus()
+    {
+        return $this->only(['id','status']);
     }
 }

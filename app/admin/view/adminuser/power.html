@@ -16,10 +16,16 @@
 
 <form class="layui-form">
     <div class="layui-form-item">
-        <label class="layui-form-label">复选框</label>
+        <label class="layui-form-label"><请选择></请选择></label>
         <div class="layui-input-block">
-            <input type="checkbox" name="CSDN" lay-filter="like" title="复选框一" value="dongsir">
-            <input type="checkbox" name="CSDN" lay-filter="like" title="复选框二" value="董先生">
+            <select name="interest" lay-filter="aihao">
+                <option value="" selected="">请选择</option>
+                <option value="0">写作</option>
+                <option value="1">阅读</option>
+                <option value="2">游戏</option>
+                <option value="3">音乐</option>
+                <option value="4">旅行</option>
+            </select>
         </div>
     </div>
 

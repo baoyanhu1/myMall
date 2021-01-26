@@ -20,7 +20,9 @@ return [
     "AdminRole" => [
         "DuplicateRoleName" => "角色名称重复",
         "FailedToAddRole" => "角色添加失败",
-        "RoleAddedSuccessfully" => "角色添加成功"
+        "RoleAddedSuccessfully" => "角色添加成功",
+        "RoleDeletedSuccessfully" => "角色删除成功",
+        "RoleDeletionFailed" => "角色删除失败"
     ]
 
 ];

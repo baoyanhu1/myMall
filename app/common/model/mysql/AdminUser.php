@@ -34,6 +34,7 @@ class AdminUser extends BaseModel
      * @return bool
      */
     public function updateById($id,$data){
+        $data['update_time'] = time();
         $id = intval($id);
         if (empty($id) || empty($data) || !is_array($data)){
             return false;

@@ -198,7 +198,7 @@
         $('.del-child').on('click', function () {
             let id = $(this).attr('data-id'); // fu
 
-            layObj.box(`是否删除此管理员`, () => {
+            layObj.box(`是否删除此角色`, () => {
                 let   url = '{:url("del")}?id=' + id +'&status=' + '-1'
                 layObj.get(url,  (res) =>{
                     if (res.status == 1){

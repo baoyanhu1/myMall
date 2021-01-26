@@ -66,4 +66,78 @@ class AdminRole extends AdminBase
 
         return show(config("status.success"),config("message.AdminRole.RoleAddedSuccessfully"));
     }
+
+    /**
+     * 软删除角色
+     * @return \think\response\Json
+     */
+    public function del()
+    {
+        $id = input("id","","intval");
+        $status = input("status","","intval");
+        $data = [
+            'id' => $id,
+            'status' => $status
+        ];
+        $status = [
+            'status' => $status
+        ];
+
+        //        验证参数
+        $AdminRoleVil = new AdminRoleVil();
+        $check = $AdminRoleVil->scene('status')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminRoleVil->getError());
+        }
+
+        // 删除分类
+        try {
+            $modelObj = new AdminRoleBus();
+            $result = $modelObj->changeStatus($data["id"],$status);
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+        if (!$result){
+            return show(config("status.error"),config("message.AdminRole.RoleDeletionFailed"));
+        }
+        return show(config("status.success"),config("message.AdminRole.RoleDeletedSuccessfully"));
+    }
+
+    /**
+     * 更改角色状态
+     */
+    public function changeStatus()
+    {
+        $id = input("id","","intval");
+        $status = input("status","","intval");
+        $data = [
+            'id' => $id,
+            'status' => $status
+        ];
+
+        $status = [
+            'status' => $status,
+            //当前登录用户
+            "operate_user" => session(config("admin.admin_user"))["username"]
+        ];
+
+        //参数验证
+        $AdminRoleVil = new AdminRoleVil();
+        $check = $AdminRoleVil->scene('status')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminRoleVil->getError());
+        }
+
+        //修改状态
+        try {
+            $modelObj = new AdminRoleBus();
+            $result = $modelObj->changeStatus($data["id"],$status);
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+        if (!$result){
+            return show(config("status.error"),config("message.AdminUser.StatusModificationFailed"));
+        }
+        return show(config("status.success"),config("message.AdminUser.StatusModifiedSuccessfully"));
+    }
 }

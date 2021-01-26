@@ -66,4 +66,22 @@ class AdminRole extends BusBase
             return [];
         }
     }
+
+    /**
+     * 更改角色状态
+     * @param $data
+     * @param $id
+     */
+    public function changeStatus($id,$data)
+    {
+        try {
+            $AdminUser = new AdminUser();
+            return $AdminUser->changeStatus($id,$data);
+        }catch (Exception $e){
+            return [];
+        }
+    }
+
+
+
 }

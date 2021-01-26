@@ -97,7 +97,7 @@
                         <a class="layui-btn layui-btn-xs layui-btn-warm data-count-delete edit" data-ptype="1"
                            lay-event="edit" data-id="{$vo.id}}">更改密码</a>
                         <a class="layui-btn layui-btn-xs layui-btn-normal power" data-ptype="1"
-                           lay-event="power" data-id="{$vo.id}}">修改权限</a>
+                           lay-event="power" data-id="{$vo.id}}">更改角色</a>
                     </td>
                     {/if}
                 </tr>
@@ -153,7 +153,7 @@
             layObj.dialog("{:url('edit')}?id="+id,'编辑')
         });
 
-        // 更改权限
+        // 更改
         $('.power').on('click', function () {
             let id = $(this).attr('data-id');
             layObj.dialog("{:url('power')}?id="+id,'更改')
