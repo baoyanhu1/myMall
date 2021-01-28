@@ -47,7 +47,7 @@
                 <thead>
                 <tr>
                     <th>id</th>
-                    <th>用户名</th>
+                    <th>角色名称</th>
                     <th class="text-center">创建时间</th>
                     <th class="text-center">更新时间</th>
                     <th class="text-center">操作人</th>
@@ -57,13 +57,13 @@
                 </thead>
                 <tbody>
                 <!--一级类目循环-->
-                {foreach $UserInfo['data'] as $key=>$vo}
+                {foreach $roleInfo['data'] as $key=>$vo}
                 <tr>
                     <td>
                         {$vo.id}
                     </td>
                     <td>
-                        {$vo.username}
+                        {$vo.name}
                     </td>
 
                     <td>
@@ -83,8 +83,6 @@
                     <td>
                         <a class="layui-btn layui-btn-xs layui-btn-danger  layui-btn-disabled" data-ptype="1"
                            lay-event="delete" data-id="">删除</a>
-                        <a class="layui-btn layui-btn-xs layui-btn-warm  layui-btn-disabled" data-ptype="1"
-                           lay-event="edit" data-id="">更改密码</a>
                     </td>
                     {else}
                     <td data-id="{$vo.id}"><input type="checkbox" {if $vo.status == 1}checked {/if} name="status" lay-skin="switch"
@@ -94,10 +92,6 @@
                     <td>
                         <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete del-child" data-ptype="1"
                            lay-event="delete" data-id="{$vo.id}}">删除</a>
-                        <a class="layui-btn layui-btn-xs layui-btn-warm data-count-delete edit" data-ptype="1"
-                           lay-event="edit" data-id="{$vo.id}}">更改密码</a>
-                        <a class="layui-btn layui-btn-xs layui-btn-normal power" data-ptype="1"
-                           lay-event="power" data-id="{$vo.id}}">更改角色</a>
                     </td>
                     {/if}
                 </tr>
@@ -130,10 +124,10 @@
 
         laypage.render({ //分页
             elem: 'pages'
-            , count: {$UserInfo.total}
+            , count: {$roleInfo.total}
             , theme: '#FFB800'
-            , limit: {$UserInfo.per_page}
-            , curr: {$UserInfo.current_page}
+            , limit: {$roleInfo.per_page}
+            , curr: {$roleInfo.current_page}
             , jump: function (obj,first) {
                 if (!first){
                     location.href="?page="+obj.curr+"&pid=1"
@@ -142,18 +136,18 @@
         });
 
 
-        // 添加用户
+        // 添加
         $('.add').on('click', function () {
-            layObj.dialog("{:url('add')}",'添加管理员')
+            layObj.dialog("{:url('add')}",'添加角色')
         });
 
-        // 编辑用户
+        // 编辑
         $('.edit').on('click', function () {
             let id = $(this).attr('data-id');
             layObj.dialog("{:url('edit')}?id="+id,'编辑')
         });
 
-        // 更改
+        // 更改权限
         $('.power').on('click', function () {
             let id = $(this).attr('data-id');
             layObj.dialog("{:url('power')}?id="+id,'更改')
@@ -169,7 +163,7 @@
                 url: '{:url("changeStatus")}?id=' + id + '&status=' + status,
                 success: (res) => {
                     layer.msg(res.message,{time:1000})
-                   // window.location.reload();
+                    // window.location.reload();
                 }
             });
             return false;
@@ -204,7 +198,7 @@
         $('.del-child').on('click', function () {
             let id = $(this).attr('data-id'); // fu
 
-            layObj.box(`是否删除此管理员`, () => {
+            layObj.box(`是否删除此角色`, () => {
                 let   url = '{:url("del")}?id=' + id +'&status=' + '-1'
                 layObj.get(url,  (res) =>{
                     if (res.status == 1){

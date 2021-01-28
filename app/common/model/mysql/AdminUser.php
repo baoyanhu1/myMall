@@ -34,6 +34,7 @@ class AdminUser extends BaseModel
      * @return bool
      */
     public function updateById($id,$data){
+        $data['update_time'] = time();
         $id = intval($id);
         if (empty($id) || empty($data) || !is_array($data)){
             return false;
@@ -69,24 +70,27 @@ class AdminUser extends BaseModel
 
     /**
      * 提交用户信息
-     * @param $username
-     * @param $password
-     * @param $isUser
+     * @param $data
+     * @return int|string
      */
-    public function setSave($username,$password,$isUser)
+    public function setSave($data)
     {
-        $data = [
-            "username" => $username,
-            "password" => $password,
-            "status" => config('status.mysql.table_normal'),
-            "create_time" => time(),
-            "update_time" => time(),
-            "last_login_time" => "",
-            "last_login_ip" => "",
-            "operate_user" => $isUser
-        ];
-
         return $this->insert($data);
     }
 
+    /**
+     * 根据主键ID 查询管理员名称
+     * @param $id
+     * @return array|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getAdminUserById($id)
+    {
+        $where = [
+          "id" => $id
+        ];
+        return $this->where($where)->find();
+    }
 }

@@ -22,6 +22,7 @@ class AdminUser extends Validate
         "password.require" => "密码不能为空",
         "password_confirm.require" => '再次输入密码不能为空',
         "password.confirm" => '两次密码不一致',
+        "password.min" => '请输入不小于6位密码',
 //        "captcha" => "验证码必填",
     ];
 
@@ -42,13 +43,22 @@ class AdminUser extends Validate
     public function sceneUser()
     {
         return $this->only(['username','password','password_confirm'])
-            ->append("password",'confirm');
+            ->append("password",'confirm')
+            ->append("password",'min:6');
     }
 
     // status 验证场景定义
     public function sceneStatus()
     {
         return $this->only(['id','status']);
+    }
+
+    // password 验证场景定义
+    public function scenePassword()
+    {
+        return $this->only(['id','password','password_confirm'])
+            ->append("password",'confirm')
+            ->append("password",'min:6');
     }
 
 }
