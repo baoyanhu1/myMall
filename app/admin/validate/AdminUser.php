@@ -61,4 +61,10 @@ class AdminUser extends Validate
             ->append("password",'min:6');
     }
 
+    // id 验证场景定义
+    public function sceneId()
+    {
+        return $this->only(['id']);
+    }
+
 }

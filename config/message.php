@@ -22,7 +22,10 @@ return [
         "FailedToAddRole" => "角色添加失败",
         "RoleAddedSuccessfully" => "角色添加成功",
         "RoleDeletedSuccessfully" => "角色删除成功",
-        "RoleDeletionFailed" => "角色删除失败"
+        "RoleDeletionFailed" => "角色删除失败",
+        "RoleSetSuccessfully" => "角色设置成功",
+        "RoleSettingFailed" => "角色设置失败",
+        "DuplicateRoleSettings" => "角色设置重复"
     ]
 
 ];

@@ -214,16 +214,68 @@ class AdminUser extends AdminBase
      */
     public function power()
     {
-
-        return View::fetch();
+        $id = input("id","","intval");
+        $data = [
+            'id' => $id
+        ];
+        //参数验证
+        $AdminUserVil = new AdminUserVil();
+        $check = $AdminUserVil->scene('id')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminUserVil->getError());
+        }
+        //        到业务逻辑
+        try {
+            $modelObj = new AdminUserBus;
+            $info = $modelObj->getRole();
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+        return View::fetch("",[
+            'roleInfo' => $info,
+            "id" => $id
+        ]);
     }
 
     /**
-     * 更改管理员权限
+     * 更改管理员角色
+     * @return \think\response\Json
      */
     public function powerSave()
     {
+        $id = input('id','','intval');
+        $status = input('status','','intval');
+        $data = [
+            "id" => $id,
+            "status" => $status
+        ];
 
+        //参数验证
+        $AdminUserVil = new AdminUserVil();
+        $check = $AdminUserVil->scene('status')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminUserVil->getError());
+        }
+
+        //当前登录用户
+        $isUser =  session(config("admin.admin_user"))["username"];
+
+        try {
+            $modelObj = new AdminUserBus;
+            //重复查询
+            $info = $modelObj->getDuplicateData($data);
+            if (!empty($info)) {
+                return show(config("status.error"),config("message.AdminRole.DuplicateRoleSettings"));
+            }
+            $save = $modelObj->setUserRole($data,$isUser);
+            if (!$save){
+                return show(config("status.error"),config("message.AdminRole.RoleSettingFailed"));
+            }
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+
+        return show(config("status.success"),config("message.AdminRole.RoleSetSuccessfully"));
     }
 
 }

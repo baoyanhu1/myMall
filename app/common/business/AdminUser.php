@@ -115,4 +115,39 @@ class AdminUser extends BusBase
        }
    }
 
+    /**
+     * 获得角色名称列表
+     * @return array
+     * @throws \think\db\exception\DbException
+     */
+   public function getRole()
+   {
+       $roleBus = new AdminRole();
+       return $roleBus->getRoleInfo(999);
+   }
+
+    /**
+     * 给管理员绑定角色
+     * 添加角色信息
+     * @param $data
+     * @param $isUser
+     */
+    public function setUserRole($data,$isUser)
+    {
+        $adminUserRole = new AdminUserRole();
+        $setRole = $adminUserRole->setRole();
+    }
+
+    /**
+     * 根据userID查询管理员是否拥有权限
+     * @param $data
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getDuplicateData($data)
+    {
+        $adminUserRole = new AdminUserRole();
+        return $adminUserRole->getAdminRoleRuleByUserId($data['id'])->toArray();
+    }
 }
