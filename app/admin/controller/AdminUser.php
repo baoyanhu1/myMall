@@ -227,12 +227,13 @@ class AdminUser extends AdminBase
         //        到业务逻辑
         try {
             $modelObj = new AdminUserBus;
-            $info = $modelObj->getRole();
+            //查找当前用户角色信息
+            $userRole = $modelObj->getDuplicateData($data);
         }catch (Exception $e){
             return show(config("status.error"),$e->getMessage());
         }
         return View::fetch("",[
-            'roleInfo' => $info,
+            'userRole' => $userRole,
             "id" => $id
         ]);
     }
@@ -244,15 +245,14 @@ class AdminUser extends AdminBase
     public function powerSave()
     {
         $id = input('id','','intval');
-        $status = input('status','','intval');
+        $roleId = input('roleid','','intval');
         $data = [
             "id" => $id,
-            "status" => $status
+            "roleid" => $roleId
         ];
-
         //参数验证
         $AdminUserVil = new AdminUserVil();
-        $check = $AdminUserVil->scene('status')->check($data);
+        $check = $AdminUserVil->scene('roleid')->check($data);
         if (!$check){
             return show(config("status.error"),$AdminUserVil->getError());
         }
@@ -262,11 +262,6 @@ class AdminUser extends AdminBase
 
         try {
             $modelObj = new AdminUserBus;
-            //重复查询
-            $info = $modelObj->getDuplicateData($data);
-            if (!empty($info)) {
-                return show(config("status.error"),config("message.AdminRole.DuplicateRoleSettings"));
-            }
             $save = $modelObj->setUserRole($data,$isUser);
             if (!$save){
                 return show(config("status.error"),config("message.AdminRole.RoleSettingFailed"));

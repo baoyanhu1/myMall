@@ -82,6 +82,33 @@ class AdminRole extends BusBase
         }
     }
 
+    /**
+     * 通过ID获取角色名称
+     * @param $id
+     * @return array
+     */
+    public function getRoleNameIsId($id)
+    {
+        try {
+            return $this->model->getRoleNameIsId($id);
+        }catch (Exception $e){
+            return [];
+        }
+    }
+
+    /**
+     * 通过ID排除当前管理角色
+     * @param $id
+     * @return array|\think\Collection
+     */
+    public function removeRoleNameById($id)
+    {
+        try {
+            return $this->model->removeRoleNameById($id);
+        }catch (Exception $e){
+            return [];
+        }
+    }
 
 
 }

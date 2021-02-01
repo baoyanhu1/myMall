@@ -135,12 +135,13 @@ class AdminUser extends BusBase
     public function setUserRole($data,$isUser)
     {
         $adminUserRole = new AdminUserRole();
-        $setRole = $adminUserRole->setRole();
+        return $adminUserRole->setRole($data,$isUser);
     }
 
     /**
      * 根据userID查询管理员是否拥有权限
      * @param $data
+     * @return array
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\DbException
      * @throws \think\db\exception\ModelNotFoundException
@@ -148,6 +149,23 @@ class AdminUser extends BusBase
     public function getDuplicateData($data)
     {
         $adminUserRole = new AdminUserRole();
-        return $adminUserRole->getAdminRoleRuleByUserId($data['id'])->toArray();
+        $userRole = $adminUserRole->getAdminRoleRuleByUserId($data['id']);
+        //没有权限展示所有角色
+        if (empty($userRole))
+        {
+            return $this->getRole();
+        }
+        //查询当前管理员角色
+        $roleModel = new AdminRole();
+        $roleName = $roleModel->getRoleNameIsId($userRole->toArray()['role_id']);
+        $residualRole = $roleModel->removeRoleNameById($userRole->toArray()['role_id']);
+        //roleName 当前管理员已拥有角色
+        //data 剩余可更换角色
+        return [
+                'roleName' => $roleName->toArray(),
+                'data' => $residualRole->toArray()
+            ];
     }
+
+
 }

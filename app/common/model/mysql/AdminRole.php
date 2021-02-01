@@ -66,6 +66,38 @@ class AdminRole extends BaseModel
         return $this->insert($data);
     }
 
+    /**
+     * 通过ID查询角色名称
+     * @param $id
+     * @return array|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getRoleNameIsId($id)
+    {
+        $where = [
+            "id" => $id
+        ];
+        return $this->where($where)->find();
+    }
+
+    /**
+     * 通过ID排除当前管理角色
+     * @param $id
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function removeRoleNameById($id)
+    {
+        $where = [
+            ["id",'<>',$id],
+            ["status","<>",config('status.mysql.table_delete')]
+        ];
+        return $this->where($where)->select();
+    }
 //    /**
 //     * 根据主键id更新用户信息
 //     * @param $id

@@ -6,15 +6,25 @@ use think\Model;
 
 class AdminUserRole extends BaseModel
 {
+
     /**
-     * 给管理员绑定角色
-     * 添加角色信息
-     * @param $data
+     * 更新管理员角色
+     * @param $info
+     * @return bool
+     */
+    public function updateRole($id,$info)
+    {
+        return $this->updateById($id,$info);
+    }
+
+    /**
+     * 添加管理员角色
+     * @param $info
      * @return int|string
      */
-    public function setRole($data)
+    public function insertRole($info)
     {
-        return $this->insert($data);
+        return $this->insert($info);
     }
 
     /**
@@ -32,4 +42,5 @@ class AdminUserRole extends BaseModel
         ];
         return $this->where($where)->find();
     }
+
 }
