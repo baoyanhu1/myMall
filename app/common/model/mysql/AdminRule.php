@@ -4,6 +4,8 @@
 namespace app\common\model\mysql;
 
 
+use think\Exception;
+
 class AdminRule extends BaseModel
 {
     /**
@@ -21,5 +23,33 @@ class AdminRule extends BaseModel
         $where = ['status' => $status];
         return $this->field($field)->where($where)->select();
 
+    }
+
+    /**
+     * 展示角色下权限名称
+     * @param $arr
+     */
+    public function ArrangementAuthority($arr)
+    {
+        $where = [
+          ['id','in',$arr]
+        ];
+        try {
+            return $this->where($where)->select();
+        }catch (Exception $e){
+            return [];
+        }
+    }
+
+    /**
+     * 展示所有title
+     */
+    public function getTitleAll()
+    {
+        try {
+            return $this->select();
+        }catch (Exception $e){
+            return [];
+        }
     }
 }

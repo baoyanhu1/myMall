@@ -13,8 +13,8 @@ return [
         "StatusModifiedSuccessfully" => "状态修改成功",
         "AdministratorDeleteFailed" => "管理员删除失败",
         "AdministratorDeletedSuccessfully" => "管理员删除成功",
-        "EditedSuccessfully" => "编辑成功",
-        "EditFailed" => "编辑失败"
+        "EditedSuccessfully" => "修改成功",
+        "EditFailed" => "修改失败"
     ],
     //AdminRole 层
     "AdminRole" => [

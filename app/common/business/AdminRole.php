@@ -1,6 +1,7 @@
 <?php
 namespace app\common\business;
 
+use app\common\lib\Tree;
 use think\Exception;
 
 class AdminRole extends BusBase
@@ -75,8 +76,7 @@ class AdminRole extends BusBase
     public function changeStatus($id,$data)
     {
         try {
-            $AdminUser = new AdminUser();
-            return $AdminUser->changeStatus($id,$data);
+            return $this->model->changeStatus($id,$data);
         }catch (Exception $e){
             return [];
         }
@@ -110,5 +110,39 @@ class AdminRole extends BusBase
         }
     }
 
+    /**
+     * 获取当前角色下权限信息
+     * @param $id
+     * @return Model|array|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getRoleRuleInfoById($id)
+    {
+        $RoleRule = new AdminRoleRule();
+        return $RoleRule->getRoleRule($id);
+    }
+
+    /**
+     * 展示角色下权限名称
+     * @param $data
+     * @return array
+     */
+    public function ArrangementAuthority($data)
+    {
+        $Rule = new AdminRule();
+        return $Rule->ArrangementAuthority($data);
+    }
+
+    /**
+     * 展示所有title
+     */
+    public function getTitleAll()
+    {
+        $Rule = new AdminRule();
+        $tree = new Tree();
+        return $tree->getTree($Rule->getTitleAll(),'id','child');
+    }
 
 }

@@ -55,4 +55,32 @@ class AdminRule extends BusBase
         ];
         return $menu;
     }
+
+    /**
+     * 展示角色下权限名称
+     * @param $data
+     * @return array
+     */
+    public function ArrangementAuthority($data)
+    {
+        $arr[] = $data['rule_ids'];
+        try {
+            return $this->model->ArrangementAuthority($arr);
+        }catch (Exception $e){
+            return [];
+        }
+    }
+
+    /**
+     * 展示所有title
+     * @return array
+     */
+    public function getTitleAll()
+    {
+        try {
+            return $this->model->getTitleAll()->toArray();
+        }catch (Exception $e){
+            return [];
+        }
+    }
 }

@@ -98,22 +98,22 @@ class AdminRole extends BaseModel
         ];
         return $this->where($where)->select();
     }
-//    /**
-//     * 根据主键id更新用户信息
-//     * @param $id
-//     * @param $data
-//     * @return bool
-//     */
-//    public function updateById($id,$data){
-//        $data['update_time'] = time();
-//        $id = intval($id);
-//        if (empty($id) || empty($data) || !is_array($data)){
-//            return false;
-//        }
-//        $where = [
-//            "id" => $id
-//        ];
-//        $result = $this->where($where)->save($data);
-//        return $result;
-//    }
+    /**
+     * 根据主键id更新用户信息
+     * @param $id
+     * @param $data
+     * @return bool
+     */
+    public function changeStatus($id,$data){
+        $data['update_time'] = time();
+        $id = intval($id);
+        if (empty($id) || empty($data) || !is_array($data)){
+            return false;
+        }
+        $where = [
+            "id" => $id
+        ];
+        $result = $this->where($where)->save($data);
+        return $result;
+    }
 }
