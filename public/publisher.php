@@ -15,7 +15,7 @@
 //    'password' => 'test'
 //);
 $config = array(
-    'host' => '127.0.0.1',
+    'host' => '47.110.139.172',
     'vhost' => '/',
     'port' => 5672,
     'login' => 'guest',

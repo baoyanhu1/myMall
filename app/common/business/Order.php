@@ -3,9 +3,11 @@
 
 namespace app\common\business;
 
+use app\api\controller\rabbitmq\CheckOrderPublisher;
 use app\common\model\mysql\Order as OrderModel;
 use app\common\lib\Snowflake;
 use think\Exception;
+use think\facade\Cache;
 
 class Order extends BusBase
 {
@@ -103,6 +105,108 @@ class Order extends BusBase
             return false;
         }
         return $result;
+    }
+
+    /**
+     * 创建秒杀订单
+     * @param $data
+     * @return bool
+     * @throws Exception
+     */
+    public function saveSpikeOrder($data){
+        $spikeData = json_decode($data,true);
+        //        生成订单号（使用雪花算法IDWorker）
+        $workId = rand(1,1023);
+        $orderId = Snowflake::getInstance()->setWorkId($workId)->nextId();
+        $orderId = (string) $orderId;
+
+//        插入order表的数据
+        $orderData = [
+            "user_id" => $spikeData['user_id'],
+            "order_id" => $orderId,
+            "total_price" => $spikeData['price'],
+            "address_id" => $spikeData['address_id'],
+            "is_spike" => config("status.mysql.table_normal")
+        ];
+
+        //        插入order_goods表的数据
+        $specsValueBus = new SpecsValue();
+        $specsValues = $specsValueBus->dealSpecsValues(explode(",",$spikeData['specs_value_ids']));
+
+        $orderGoodsData = [
+            "order_id" => $orderId,
+            "sku_id" => $spikeData['sku_id'],
+            "sku" => implode(" ",$specsValues),
+            "goods_id" => $spikeData['goods_id'],
+            "num" => config("status.mysql.table_normal"),
+            "price" => $spikeData['price'],
+            "title" => $spikeData['title'],
+            "image" => $spikeData['image'],
+        ];
+
+//        开启事务
+        $this->model->startTrans();
+        try {
+            //        插入订单主表order
+            $orderResult = $this->save($orderData);
+
+            //        插入订单附表order_goods
+            $orderGoodsBus = new OrderGoods();
+            $orderGoodsResult = $orderGoodsBus->save($orderGoodsData);
+
+//            订单主表和附表全部新增成功
+            if ($orderResult && $orderGoodsResult){
+                $publisherData = [
+                    "user_id" => $spikeData['user_id'],
+                    "order_id" => $orderId,
+                    "sku_id" => $spikeData['sku_id'],
+                ];
+                $checkOrderPublisherObj = new CheckOrderPublisher();
+                $checkOrderPublisherObj::pushMessage(json_encode($publisherData));
+            }
+            //            事务提交
+            $this->model->commit();
+        }catch (Exception $e){
+//            事务回滚
+            $this->model->rollback();
+            return false;
+        }
+    }
+
+    /**
+     * 检查秒杀商品是否支付
+     * @param $data
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function checkOrderStatus($data){
+        $data = json_decode($data,true);
+
+        //获取订单信息
+        $orderInfo = $this->model->getOrderStatus($data['order_id']);
+        $orderInfo = $orderInfo->toArray();
+        //如果订单为未支付状态（将订单状态改为已取消、删除redis内存储的用户ID（用来 用户可以再次发起秒杀）、根据接收到的商品ID自增Redis内商品库存）
+        if ($orderInfo['status'] == config('status.mysql.pending_payment')){
+            try {
+                //更改订单状态为取消状态
+                $ordeResult = $this->model->updateOrderStatus($data['order_id'],config('status.mysql.is_cancelled'));
+                if ($ordeResult){
+                    //删除redis内存储的用户ID（用来 用户可以再次发起秒杀）
+                    Cache::sRem('goods-spike-user',$data['user_id']);
+//                    根据接收到的商品skuID增加Redis内商品库存
+//                    获取redis内数据
+                    $goodsSkipeInfo = Cache::hGet("goods-spike",$data['sku_id']);
+                    if ($goodsSkipeInfo){
+                        $goodsSkipeInfo = json_decode($goodsSkipeInfo,true);
+                        $goodsSkipeInfo['stock'] = $goodsSkipeInfo['stock'] + 1;
+                        Cache::hSet("goods-spike",$data['sku_id'],json_encode($goodsSkipeInfo));
+                    }
+                }
+            }catch (Exception $e){
+//                todo 记录日志
+            }
+        }
     }
 
     /**

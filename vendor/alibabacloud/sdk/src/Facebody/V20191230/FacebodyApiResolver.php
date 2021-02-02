@@ -38,8 +38,10 @@ use AlibabaCloud\Client\Resolver\ApiResolver;
  * @method FaceMakeup faceMakeup(array $options = [])
  * @method FaceTidyup faceTidyup(array $options = [])
  * @method GenerateHumanAnimeStyle generateHumanAnimeStyle(array $options = [])
+ * @method GenRealPersonVerificationToken genRealPersonVerificationToken(array $options = [])
  * @method GetBodyPerson getBodyPerson(array $options = [])
  * @method GetFaceEntity getFaceEntity(array $options = [])
+ * @method GetRealPersonVerificationResult getRealPersonVerificationResult(array $options = [])
  * @method HandPosture handPosture(array $options = [])
  * @method ListBodyDbs listBodyDbs(array $options = [])
  * @method ListBodyPerson listBodyPerson(array $options = [])
@@ -288,25 +290,12 @@ class BodyPosture extends Rpc
 }
 
 /**
- * @method string getImageType()
  * @method string getImageURLB()
  * @method string getImageURLA()
+ * @method string getImageType()
  */
 class CompareFace extends Rpc
 {
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function withImageType($value)
-    {
-        $this->data['ImageType'] = $value;
-        $this->options['form_params']['ImageType'] = $value;
-
-        return $this;
-    }
 
     /**
      * @param string $value
@@ -330,6 +319,19 @@ class CompareFace extends Rpc
     {
         $this->data['ImageURLA'] = $value;
         $this->options['form_params']['ImageURLA'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withImageType($value)
+    {
+        $this->data['ImageType'] = $value;
+        $this->options['form_params']['ImageType'] = $value;
 
         return $this;
     }
@@ -917,6 +919,7 @@ class EnhanceFace extends Rpc
 /**
  * @method string getMode()
  * @method string getImageURL()
+ * @method string getServiceVersion()
  */
 class ExtractPedestrianFeatureAttr extends Rpc
 {
@@ -943,6 +946,19 @@ class ExtractPedestrianFeatureAttr extends Rpc
     {
         $this->data['ImageURL'] = $value;
         $this->options['form_params']['ImageURL'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withServiceVersion($value)
+    {
+        $this->data['ServiceVersion'] = $value;
+        $this->options['form_params']['ServiceVersion'] = $value;
 
         return $this;
     }
@@ -1231,6 +1247,54 @@ class GenerateHumanAnimeStyle extends Rpc
 }
 
 /**
+ * @method string getCertificateNumber()
+ * @method string getCertificateName()
+ * @method string getMetaInfo()
+ */
+class GenRealPersonVerificationToken extends Rpc
+{
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withCertificateNumber($value)
+    {
+        $this->data['CertificateNumber'] = $value;
+        $this->options['form_params']['CertificateNumber'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withCertificateName($value)
+    {
+        $this->data['CertificateName'] = $value;
+        $this->options['form_params']['CertificateName'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withMetaInfo($value)
+    {
+        $this->data['MetaInfo'] = $value;
+        $this->options['form_params']['MetaInfo'] = $value;
+
+        return $this;
+    }
+}
+
+/**
  * @method string getPersonId()
  * @method $this withPersonId($value)
  * @method string getDbId()
@@ -1272,6 +1336,40 @@ class GetFaceEntity extends Rpc
     {
         $this->data['DbName'] = $value;
         $this->options['form_params']['DbName'] = $value;
+
+        return $this;
+    }
+}
+
+/**
+ * @method string getVerificationToken()
+ * @method string getMaterialHash()
+ */
+class GetRealPersonVerificationResult extends Rpc
+{
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withVerificationToken($value)
+    {
+        $this->data['VerificationToken'] = $value;
+        $this->options['form_params']['VerificationToken'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function withMaterialHash($value)
+    {
+        $this->data['MaterialHash'] = $value;
+        $this->options['form_params']['MaterialHash'] = $value;
 
         return $this;
     }

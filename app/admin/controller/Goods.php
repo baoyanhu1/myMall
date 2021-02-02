@@ -29,7 +29,10 @@ class Goods extends AdminBase
             $data['create_time'] = explode("~",$time);
         }
         $goodsBus = new GoodsBus();
-        $goods = $goodsBus->getLists($data,3);
+        $where = [
+            'is_spike' => config("status.mysql.is_no_spike")
+        ];
+        $goods = $goodsBus->getLists($data,3,$where);
         return View::fetch("",[
             'goods'=>$goods
         ]);
@@ -41,6 +44,62 @@ class Goods extends AdminBase
      */
     public function add(){
         return View::fetch();
+    }
+
+    /**
+     * 渲染秒杀商品列表页
+     * @return string
+     */
+    public function spike(){
+        $title = input("param.title","","trim");
+        $time = input("param.time","","trim");
+//        按条件搜索商品
+        $data = [];
+        if (!empty($title)){
+            $data['title'] = $title;
+        }
+        if (!empty($time)){
+            $data['create_time'] = explode("~",$time);
+        }
+        $goodsBus = new GoodsBus();
+        $where = [
+            'is_spike' => config("status.mysql.is_spike")
+        ];
+        $goods = $goodsBus->getLists($data,3,$where);
+        return View::fetch("",[
+            'goods'=>$goods
+        ]);
+    }
+
+    /**
+     * 修改商品状态
+     * @return \think\response\Json
+     */
+    public function changeStatus(){
+        $id = input("param.id","","intval");
+        $status = input("param.status","","intval");
+        $data = [
+            'id' => $id,
+            'status' => $status
+        ];
+//        验证参数
+        $goodsVil = new GoodsVil();
+        $check = $goodsVil->scene('changeStatus')->check($data);
+        if (!$check){
+            return show(config("status.error"),$goodsVil->getError());
+        }
+
+        // 修改状态
+        try {
+            $goodsBus = new GoodsBus();
+            $result = $goodsBus->changeStatus($data);
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+        if (!$result){
+            return show(config("status.error"),"状态修改失败");
+        }
+        return show(config("status.success"),"状态修改成功");
     }
 
     /**
@@ -65,6 +124,25 @@ class Goods extends AdminBase
         $data['category_path_id'] = implode(",",$data['category_path_id']);
         $data['category_id'] = end($category_id);
         $data['production_time'] = strtotime($data['production_time']);
+        $data['is_spike'] = $data['goods_spike'];
+//        如果是秒杀商品（处理秒杀开始/结束时间）
+        if ($data['is_spike'] == config("status.mysql.is_spike")){
+            if (empty($data['spike_time'])){
+                return show(config("status.error"),"秒杀场景必选秒杀时间");
+            }
+            $spike_time = explode("~",trim($data['spike_time']));
+            $spike_start_time = $spike_time[0];
+            $spike_end_time = $spike_time[1];
+            if (!$spike_start_time){
+                return show(config("status.error"),"秒杀开始时间必选");
+            }
+            if (!$spike_end_time){
+                return show(config("status.error"),"秒杀结束时间必选");
+            }
+            $data['spike_start_time'] = strtotime(trim($spike_start_time));
+            $data['spike_end_time'] = strtotime(trim($spike_end_time));
+            $data['status'] = config("status.error");
+        }
 
         try {
 //            新增商品业务逻辑
