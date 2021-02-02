@@ -21,10 +21,47 @@ class AdminRoleRule extends BusBase
     public function getRoleRule($id)
     {
         try {
-            return $this->model->getRoleRule($id)->toArray();
+            return $this->model->getRoleRule($id);
         }catch (Exception $e){
             return [];
         }
 
+    }
+
+    /**
+     * 保存角色权限
+     * @param $empty
+     * @param $data
+     * @param $isUser
+     * @return array
+     */
+    public function roleRuleSave($empty,$data,$isUser)
+    {
+        $info = [
+            "role_id" => $data['id'],
+            "rule_ids" => implode(',',$data['onArray']),
+            "update_time" => time(),
+            "operate_user" => $isUser,
+            "status" => config("status.mysql.table_normal")
+        ];
+
+        if (!empty($empty))
+        {
+            try {
+                return $this->model->updateRoleRule($info);
+            }catch (Exception $e){
+                return [];
+            }
+        }
+
+        $info += [
+            "create_time" => time(),
+        ];
+
+        try {
+            return $this->model->saveRoleRule($info);
+        }catch (Exception $e){
+            return [];
+        }
     }
 }

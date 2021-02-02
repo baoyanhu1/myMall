@@ -21,4 +21,25 @@ class AdminRoleRule extends BaseModel
         ];
         return $this->where($where)->find();
     }
+
+    /**
+     * 更新角色权限
+     * @param $info
+     */
+    public function updateRoleRule($info)
+    {
+        $where = [
+            "role_id" => $info['role_id']
+        ];
+        return $this->where($where)->update($info);
+    }
+
+    /**
+     * 添加角色权限
+     * @param $info
+     */
+    public function saveRoleRule($info)
+    {
+        return $this->insert($info);
+    }
 }

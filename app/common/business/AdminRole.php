@@ -137,6 +137,7 @@ class AdminRole extends BusBase
 
     /**
      * 展示所有title
+     * @return array
      */
     public function getTitleAll()
     {
@@ -145,4 +146,16 @@ class AdminRole extends BusBase
         return $tree->getTree($Rule->getTitleAll(),'id','child');
     }
 
+    /**
+     * 保存角色权限
+     * @param $empty
+     * @param $data
+     * @param $isUser
+     * @return array
+     */
+    public function roleRuleSave($empty,$data,$isUser)
+    {
+        $RoleRule = new AdminRoleRule();
+        return $RoleRule->roleRuleSave($empty,$data,$isUser);
+    }
 }

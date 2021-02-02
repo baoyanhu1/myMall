@@ -71,14 +71,14 @@
                     if (res.status == '0')
                     {
                         layer.msg(res.message,{time:1000})
-                        return false;
+                        return false
                     }
                     //延迟关闭
                     layer.msg(res.message,{time:1000},function () {
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index)
                     })
-                    setTimeout('window.location.reload()',1000);
+                    //setTimeout('window.location.reload()',1000);
                     //console.log(res)
                 }
             })

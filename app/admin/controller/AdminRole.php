@@ -170,7 +170,8 @@ class AdminRole extends AdminBase
         }
 
         return View::fetch('',[
-            'title' => $result
+            'title' => $result,
+            'id' => $id
         ]);
     }
 
@@ -180,15 +181,33 @@ class AdminRole extends AdminBase
     public function userPowerSave()
     {
         $onArray = input("onArray","","");
-        //dump(implode('，',$onArray));die();
+        $id = input("id","","intval");
         $data = [
-            'onArray' => $onArray
+            'onArray' => $onArray,
+            'id' => $id
         ];
         //参数验证
         $AdminRoleVil = new AdminRoleVil();
-        $check = $AdminRoleVil->scene('OnArray')->check($data);
+        $check = $AdminRoleVil->scene('onArray')->check($data);
         if (!$check){
             return show(config("status.error"),$AdminRoleVil->getError());
         }
+        //当前登录用户
+        $isUser =  session(config("admin.admin_user"))["username"];
+        //        到业务逻辑
+        try {
+            $modelObj = new AdminRoleBus;
+            //查询是否存在
+            $empty = $modelObj->getRoleRuleInfoById($id);
+            //到业务层进行保存
+            $save = $modelObj->roleRuleSave($empty,$data,$isUser);
+            if (!$save){
+                return show(config("status.error"),config("message.AdminUser.EditFailed"));
+            }
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+
+        return show(config("status.success"),config("message.AdminUser.EditedSuccessfully"));
     }
 }

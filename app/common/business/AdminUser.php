@@ -34,7 +34,7 @@ class AdminUser extends BusBase
      */
     public function setSave($data,$isUser)
     {
-        $data = [
+        $info = [
             "username" => $data['username'],
             "password" => phpass($data['password']),
             "status" => config('status.mysql.table_normal'),
@@ -45,7 +45,7 @@ class AdminUser extends BusBase
             "operate_user" => $isUser
         ];
         try {
-            return $this->model->setSave($data);
+            return $this->model->setSave($info);
         }catch (Exception $e){
             return [];
         }

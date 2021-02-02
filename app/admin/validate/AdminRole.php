@@ -9,7 +9,7 @@ class AdminRole extends Validate
         "name" => "require",
         "id" => "require",
         "status" => "require",
-        "OnArray" => "require"
+        "onArray" => "require"
     ];
 
     protected $message = [
@@ -37,6 +37,6 @@ class AdminRole extends Validate
     //OnArray 验证场景定义
     public function sceneOnArray()
     {
-        return $this->only(['OnArray']);
+        return $this->only(['onArray','id']);
     }
 }

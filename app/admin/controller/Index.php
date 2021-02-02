@@ -18,7 +18,9 @@ class Index extends AdminBase
 
     public function getMenu(){
         $obj = new AdminRuleBus();
-        $sidebar = $obj->Menu();
+        //当前登录用户
+        $isUser =  session(config("admin.admin_user"))["id"];
+        $sidebar = $obj->Menu($isUser);
         return $sidebar;
     }
 
