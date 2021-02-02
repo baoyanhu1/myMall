@@ -89,7 +89,6 @@ class AdminRole extends AdminBase
         if (!$check){
             return show(config("status.error"),$AdminRoleVil->getError());
         }
-
         // 删除分类
         try {
             $modelObj = new AdminRoleBus();
@@ -139,5 +138,76 @@ class AdminRole extends AdminBase
             return show(config("status.error"),config("message.AdminUser.StatusModificationFailed"));
         }
         return show(config("status.success"),config("message.AdminUser.StatusModifiedSuccessfully"));
+    }
+
+    /**
+     * 角色权限弹出层
+     * @return string|\think\response\Json
+     */
+    public function userPower()
+    {
+        $id = input("id","","intval");
+        $data = [
+            'id' => $id
+        ];
+        //参数验证
+        $AdminRoleVil = new AdminRoleVil();
+        $check = $AdminRoleVil->scene('id')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminRoleVil->getError());
+        }
+        //查询
+        try {
+            $modelObj = new AdminRoleBus();
+//            $result = $modelObj->getRoleRuleInfoById($id);
+//            //对查询出的权限进行整理
+//            $roleName = $modelObj->ArrangementAuthority($result);
+//            dump($roleName);die();
+            //展示所有title
+            $result = $modelObj->getTitleAll();
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+
+        return View::fetch('',[
+            'title' => $result,
+            'id' => $id
+        ]);
+    }
+
+    /**
+     * 保存角色权限
+     */
+    public function userPowerSave()
+    {
+        $onArray = input("onArray","","");
+        $id = input("id","","intval");
+        $data = [
+            'onArray' => $onArray,
+            'id' => $id
+        ];
+        //参数验证
+        $AdminRoleVil = new AdminRoleVil();
+        $check = $AdminRoleVil->scene('onArray')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminRoleVil->getError());
+        }
+        //当前登录用户
+        $isUser =  session(config("admin.admin_user"))["username"];
+        //        到业务逻辑
+        try {
+            $modelObj = new AdminRoleBus;
+            //查询是否存在
+            $empty = $modelObj->getRoleRuleInfoById($id);
+            //到业务层进行保存
+            $save = $modelObj->roleRuleSave($empty,$data,$isUser);
+            if (!$save){
+                return show(config("status.error"),config("message.AdminUser.EditFailed"));
+            }
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+
+        return show(config("status.success"),config("message.AdminUser.EditedSuccessfully"));
     }
 }

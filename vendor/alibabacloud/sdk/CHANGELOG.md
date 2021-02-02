@@ -1,5 +1,250 @@
 # CHANGELOG
 
+## 1.8.825 - 2021-1-29
+- Update Monitor Api.
+
+
+## 1.8.824 - 2021-1-28
+- Update QueryMetric api support customFilters parameter.
+
+
+## 1.8.823 - 2021-1-28
+- Generated 2018-03-13 for `retailcloud`.
+
+
+## 1.8.822 - 2021-1-27
+- Add New BatchTranslate API.
+
+
+## 1.8.821 - 2021-1-27
+- DetectFaceAttributes Add Score.
+
+
+## 1.8.820 - 2021-1-25
+- Regenerate SDK to override list implement.
+
+
+## 1.8.819 - 2021-1-25
+- Update Open API.
+
+
+## 1.8.818 - 2021-1-22
+- Update Function.
+
+
+## 1.8.817 - 2021-1-21
+- Modify some field types.
+
+
+## 1.8.816 - 2021-1-21
+- Generated 2019-09-10 for `waf-openapi`.
+
+
+## 1.8.815 - 2021-1-21
+- Add.
+
+
+## 1.8.814 - 2021-1-20
+- Add metrics data API.
+
+
+## 1.8.813 - 2021-1-19
+- Update Function.
+
+
+## 1.8.812 - 2021-1-18
+- Generated 2019-03-27 for `dg`.
+
+
+## 1.8.811 - 2021-1-18
+- Add a set of API to support device distribution management, including CreateProductDistributeJob, CreateDeviceDistributeJob, QueryDeviceDistributeJob, ListDeviceDistributeJob, QueryDeviceDistributeDetail, DeleteDeviceDistributeJob, ListDistributedDevice, ListDistributedProduct etc.
+
+
+## 1.8.810 - 2021-1-18
+- Add a set of api to support device distribution management, including CreateProductDistributeJob, CreateDeviceDistributeJob, QueryDeviceDistributeJob, ListDeviceDistributeJob, QueryDeviceDistributeDetail, DeleteDeviceDistributeJob, ListDistributedDevice, ListDistributedProduct etc.
+
+
+## 1.8.809 - 2021-1-18
+- Add ListMergeRequests api.
+- Add protected branch api, CreateRepositoryProtectedBranch and DeleteRepositoryProtectedBranch.
+- Add repository deploy key api, EnableRepositoryDeployKey and CreateRepositoryDeployKey.
+- Add UpdateRepository api.
+- Update GetUserInfo, support use OrganizationId param to get user organization name.
+
+
+
+## 1.8.808 - 2021-1-15
+- Add result value spanId for GetTrace api.
+
+
+## 1.8.807 - 2021-1-15
+- Update Function.
+
+
+## 1.8.806 - 2021-1-15
+- Update Function.
+
+
+## 1.8.805 - 2021-1-15
+- Add API CreateSortScriptValidation.
+- Add parameter resourceGroupId to API ListAppGroups.
+
+
+## 1.8.804 - 2021-1-14
+- Add function.
+
+
+## 1.8.803 - 2021-1-14
+- Add BillingDate support in QueryAccontBill.
+- Add SplitAccountId, SplitAccountName, SplitBillingCycle, SplitProductDetail, SplitCommodityCode, ServicePeriodUnit support in QuerySplitItemBill.
+
+
+## 1.8.802 - 2021-1-14
+- Update Open API.
+
+
+## 1.8.801 - 2021-1-14
+- Update function.
+
+
+## 1.8.800 - 2021-1-14
+- Create Lindorm Open api.
+
+
+## 1.8.799 - 2021-1-13
+- Add SwitchInstanceHA API.
+- ModifyInstanceSpec add SourceBiz param.
+
+
+## 1.8.798 - 2021-1-13
+- Generated 2016-11-01 for `live`.
+
+
+## 1.8.797 - 2021-1-12
+- Add support for IoT jobs, including job management and query APIs like CreateJob, UpdateJob, QueryJob, CancelJob, ListTask, QueryTask, QueryJobStatistics etc.
+
+
+## 1.8.796 - 2021-1-12
+- Update ExtractPedestrianFeatureAttr.
+
+
+## 1.8.795 - 2021-1-11
+- Add result value spanId for GetTrace api.
+
+
+## 1.8.794 - 2021-1-11
+- Add DescribeConnectionStatus and DescribeDTSIP, remove UpgradeTwoWay.
+
+
+## 1.8.793 - 2021-1-8
+- Add API related to resource quota of source monitoring.
+- Add a new version of alert log API.
+
+
+## 1.8.792 - 2021-1-7
+- Add new API for configuration and report.
+
+
+## 1.8.791 - 2021-1-7
+- Add CreateAndStartBackupPlan.
+- Add DescribeDLAService.
+- Add CreateDLAService.
+- Add CloseDLAService.
+
+
+## 1.8.790 - 2021-1-7
+- Generated 2019-09-10 for `waf-openapi`.
+
+
+## 1.8.789 - 2021-1-7
+- Generated 2020-11-26 for `Airec`.
+
+
+## 1.8.788 - 2021-1-6
+- Update DetectLungNodule.
+
+
+## 1.8.787 - 2021-1-6
+- Support input parameter ClientToken for CreateAutoProvisioningGroup.
+
+
+## 1.8.786 - 2021-1-6
+- Add API.
+
+
+## 1.8.785 - 2021-1-5
+- Remove legacy APIs.
+
+
+## 1.8.784 - 2021-1-5
+- Add DescribeBackupTasks API.
+
+
+## 1.8.783 - 2021-1-4
+- Generated 2014-05-26 for `Ecs`.
+
+
+## 1.8.782 - 2021-1-4
+- Supported API for GTM.
+
+
+## 1.8.781 - 2020-12-31
+- Add support for thing model function block features, including thing model APIs like CreateThingModel,UpdateThingModel,SetDeviceProperty,InvokeThingService etc.
+
+
+## 1.8.780 - 2020-12-31
+- Update Open API.
+
+
+## 1.8.779 - 2020-12-30
+- Add DescribeActiveOperationTask API.
+- Add ModifyActiveOperationTask API.
+
+
+## 1.8.778 - 2020-12-30
+- Support directly specify image version deploy.
+
+
+## 1.8.777 - 2020-12-29
+- Supported SystemDiskPerformanceLevel, SystemDiskDeleteWithInstance, DataDiskPerformanceLevel, NetworkInterfaceSecurityGroupIds, SecurityGroupIds, PrivateIpAddress for CreateLaunchTemplate, CreateLaunchTemplateVersion, DescribeLaunchTemplateVersion.
+
+
+## 1.8.776 - 2020-12-29
+- ListNodesNoPaging return with instance type.
+
+
+## 1.8.775 - 2020-12-28
+- Generated 2020-05-18 for `dataworks-public`.
+
+
+## 1.8.774 - 2020-12-28
+- Release InterpolateVideoFrame ToneSdrVideo ConvertHdrVideo.
+
+
+## 1.8.773 - 2020-12-28
+- Release GenRealPersonVerificationToken GetRealPersonVerificationResult.
+
+
+## 1.8.772 - 2020-12-28
+- Add CommodityCode For QueryOrderAPI.
+
+
+## 1.8.771 - 2020-12-28
+- Ecs confirm.
+
+
+## 1.8.770 - 2020-12-28
+- Add some console API operations.
+
+
+## 1.8.769 - 2020-12-25
+- Generated 2016-04-08 for `Emr`.
+
+
+## 1.8.768 - 2020-12-25
+- Supported for weboffice edit.
+
+
 ## 1.8.767 - 2020-12-24
 - Modify ConfigureBackupPlan.
 

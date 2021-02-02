@@ -214,16 +214,63 @@ class AdminUser extends AdminBase
      */
     public function power()
     {
-
-        return View::fetch();
+        $id = input("id","","intval");
+        $data = [
+            'id' => $id
+        ];
+        //参数验证
+        $AdminUserVil = new AdminUserVil();
+        $check = $AdminUserVil->scene('id')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminUserVil->getError());
+        }
+        //        到业务逻辑
+        try {
+            $modelObj = new AdminUserBus;
+            //查找当前用户角色信息
+            $userRole = $modelObj->getDuplicateData($data);
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+        return View::fetch("",[
+            'userRole' => $userRole,
+            "id" => $id
+        ]);
     }
 
     /**
-     * 更改管理员权限
+     * 更改管理员角色
+     * @return \think\response\Json
      */
     public function powerSave()
     {
+        $id = input('id','','intval');
+        $roleId = input('roleid','','intval');
+        $data = [
+            "id" => $id,
+            "roleid" => $roleId
+        ];
+        //参数验证
+        $AdminUserVil = new AdminUserVil();
+        $check = $AdminUserVil->scene('roleid')->check($data);
+        if (!$check){
+            return show(config("status.error"),$AdminUserVil->getError());
+        }
 
+        //当前登录用户
+        $isUser =  session(config("admin.admin_user"))["username"];
+
+        try {
+            $modelObj = new AdminUserBus;
+            $save = $modelObj->setUserRole($data,$isUser);
+            if (!$save){
+                return show(config("status.error"),config("message.AdminRole.RoleSettingFailed"));
+            }
+        }catch (Exception $e){
+            return show(config("status.error"),$e->getMessage());
+        }
+
+        return show(config("status.success"),config("message.AdminRole.RoleSetSuccessfully"));
     }
 
 }

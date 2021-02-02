@@ -13,8 +13,8 @@ return [
         "StatusModifiedSuccessfully" => "状态修改成功",
         "AdministratorDeleteFailed" => "管理员删除失败",
         "AdministratorDeletedSuccessfully" => "管理员删除成功",
-        "EditedSuccessfully" => "编辑成功",
-        "EditFailed" => "编辑失败"
+        "EditedSuccessfully" => "修改成功",
+        "EditFailed" => "修改失败"
     ],
     //AdminRole 层
     "AdminRole" => [
@@ -22,7 +22,10 @@ return [
         "FailedToAddRole" => "角色添加失败",
         "RoleAddedSuccessfully" => "角色添加成功",
         "RoleDeletedSuccessfully" => "角色删除成功",
-        "RoleDeletionFailed" => "角色删除失败"
+        "RoleDeletionFailed" => "角色删除失败",
+        "RoleSetSuccessfully" => "角色设置成功",
+        "RoleSettingFailed" => "角色设置失败",
+        "DuplicateRoleSettings" => "角色设置重复"
     ]
 
 ];

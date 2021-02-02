@@ -34,7 +34,7 @@ class AdminUser extends BusBase
      */
     public function setSave($data,$isUser)
     {
-        $data = [
+        $info = [
             "username" => $data['username'],
             "password" => phpass($data['password']),
             "status" => config('status.mysql.table_normal'),
@@ -45,7 +45,7 @@ class AdminUser extends BusBase
             "operate_user" => $isUser
         ];
         try {
-            return $this->model->setSave($data);
+            return $this->model->setSave($info);
         }catch (Exception $e){
             return [];
         }
@@ -114,5 +114,58 @@ class AdminUser extends BusBase
            return [];
        }
    }
+
+    /**
+     * 获得角色名称列表
+     * @return array
+     * @throws \think\db\exception\DbException
+     */
+   public function getRole()
+   {
+       $roleBus = new AdminRole();
+       return $roleBus->getRoleInfo(999);
+   }
+
+    /**
+     * 给管理员绑定角色
+     * 添加角色信息
+     * @param $data
+     * @param $isUser
+     */
+    public function setUserRole($data,$isUser)
+    {
+        $adminUserRole = new AdminUserRole();
+        return $adminUserRole->setRole($data,$isUser);
+    }
+
+    /**
+     * 根据userID查询管理员是否拥有权限
+     * @param $data
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getDuplicateData($data)
+    {
+        $adminUserRole = new AdminUserRole();
+        $userRole = $adminUserRole->getAdminRoleRuleByUserId($data['id']);
+        //没有权限展示所有角色
+        if (empty($userRole))
+        {
+            return $this->getRole();
+        }
+        //查询当前管理员角色
+        $roleModel = new AdminRole();
+        $roleName = $roleModel->getRoleNameIsId($userRole->toArray()['role_id']);
+        $residualRole = $roleModel->removeRoleNameById($userRole->toArray()['role_id']);
+        //roleName 当前管理员已拥有角色
+        //data 剩余可更换角色
+        return [
+                'roleName' => $roleName->toArray(),
+                'data' => $residualRole->toArray()
+            ];
+    }
+
 
 }

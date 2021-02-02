@@ -15,6 +15,7 @@ class AdminUser extends Validate
 //        "captcha" => "require|checkCaptcha",
         "id" => "require",
         "status" => "require",
+        "roleId" => "require"
     ];
 
     protected $message = [
@@ -24,6 +25,7 @@ class AdminUser extends Validate
         "password.confirm" => '两次密码不一致',
         "password.min" => '请输入不小于6位密码',
 //        "captcha" => "验证码必填",
+        "roleId.require" => "用户ID不可为空"
     ];
 
     public function checkCaptcha($value){
@@ -59,6 +61,18 @@ class AdminUser extends Validate
         return $this->only(['id','password','password_confirm'])
             ->append("password",'confirm')
             ->append("password",'min:6');
+    }
+
+    // id 验证场景定义
+    public function sceneId()
+    {
+        return $this->only(['id']);
+    }
+
+    // roleid 验证场景定义
+    public function sceneRoleId()
+    {
+        return $this->only(['roleid','id']);
     }
 
 }

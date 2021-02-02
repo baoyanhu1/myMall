@@ -83,6 +83,8 @@
                     <td>
                         <a class="layui-btn layui-btn-xs layui-btn-danger  layui-btn-disabled" data-ptype="1"
                            lay-event="delete" data-id="">删除</a>
+                        <a class="layui-btn layui-btn-xs layui-btn-normal power" data-ptype="1"
+                           lay-event="power" data-id="{$vo.id}}">更改角色权限</a>
                     </td>
                     {else}
                     <td data-id="{$vo.id}"><input type="checkbox" {if $vo.status == 1}checked {/if} name="status" lay-skin="switch"
@@ -92,6 +94,8 @@
                     <td>
                         <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete del-child" data-ptype="1"
                            lay-event="delete" data-id="{$vo.id}}">删除</a>
+                        <a class="layui-btn layui-btn-xs layui-btn-normal power" data-ptype="1"
+                           lay-event="power" data-id="{$vo.id}}">更改角色权限</a>
                     </td>
                     {/if}
                 </tr>
@@ -150,7 +154,7 @@
         // 更改权限
         $('.power').on('click', function () {
             let id = $(this).attr('data-id');
-            layObj.dialog("{:url('power')}?id="+id,'更改')
+            layObj.dialog("{:url('userPower')}?id="+id,'更改')
         });
 
         //监听状态 更改
@@ -197,7 +201,6 @@
         // 删除二级分类
         $('.del-child').on('click', function () {
             let id = $(this).attr('data-id'); // fu
-
             layObj.box(`是否删除此角色`, () => {
                 let   url = '{:url("del")}?id=' + id +'&status=' + '-1'
                 layObj.get(url,  (res) =>{

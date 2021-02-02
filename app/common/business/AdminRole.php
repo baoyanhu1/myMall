@@ -1,6 +1,7 @@
 <?php
 namespace app\common\business;
 
+use app\common\lib\Tree;
 use think\Exception;
 
 class AdminRole extends BusBase
@@ -75,13 +76,86 @@ class AdminRole extends BusBase
     public function changeStatus($id,$data)
     {
         try {
-            $AdminUser = new AdminUser();
-            return $AdminUser->changeStatus($id,$data);
+            return $this->model->changeStatus($id,$data);
         }catch (Exception $e){
             return [];
         }
     }
 
+    /**
+     * 通过ID获取角色名称
+     * @param $id
+     * @return array
+     */
+    public function getRoleNameIsId($id)
+    {
+        try {
+            return $this->model->getRoleNameIsId($id);
+        }catch (Exception $e){
+            return [];
+        }
+    }
 
+    /**
+     * 通过ID排除当前管理角色
+     * @param $id
+     * @return array|\think\Collection
+     */
+    public function removeRoleNameById($id)
+    {
+        try {
+            return $this->model->removeRoleNameById($id);
+        }catch (Exception $e){
+            return [];
+        }
+    }
 
+    /**
+     * 获取当前角色下权限信息
+     * @param $id
+     * @return Model|array|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getRoleRuleInfoById($id)
+    {
+        $RoleRule = new AdminRoleRule();
+        return $RoleRule->getRoleRule($id);
+    }
+
+    /**
+     * 展示角色下权限名称
+     * @param $data
+     * @return array
+     */
+    public function ArrangementAuthority($data)
+    {
+        $Rule = new AdminRule();
+        return $Rule->ArrangementAuthority($data);
+    }
+
+    /**
+     * 展示所有title
+     * @return array
+     */
+    public function getTitleAll()
+    {
+        $Rule = new AdminRule();
+        $tree = new Tree();
+        return $tree->getTree($Rule->getTitleAll(),'id','child');
+    }
+
+    /**
+     * 保存角色权限
+     * @param $empty
+     * @param $data
+     * @param $isUser
+     * @return array
+     */
+    public function roleRuleSave($empty,$data,$isUser)
+    {
+        $RoleRule = new AdminRoleRule();
+        return $RoleRule->roleRuleSave($empty,$data,$isUser);
+    }
 }

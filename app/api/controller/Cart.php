@@ -11,6 +11,10 @@ use think\Exception;
 
 class Cart extends AuthBase
 {
+    /**
+     * 加入购物车
+     * @return \think\response\Json
+     */
     public function add(){
         if (!$this->request->isPost()){
             return Show::error([],"请求方式错误");

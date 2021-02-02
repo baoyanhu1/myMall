@@ -31,7 +31,7 @@ class Goods extends BaseModel
      * @return \think\Paginator
      * @throws \think\db\exception\DbException
      */
-    public function getLists($likeKeys,$data,$num){
+    public function getLists($likeKeys,$data,$num,$where){
         if (!empty($likeKeys)){
             $res = $this->withSearch($likeKeys,$data);
         }else{
@@ -41,9 +41,42 @@ class Goods extends BaseModel
             'listorder' => 'asc',
             'id' => 'asc'
         ];
-        $result = $res->whereIn('status',[0,1])
+
+        $result = $res->where($where)
+            ->whereIn('status',[0,1])
             ->order($order)
             ->paginate($num);
+        return $result;
+    }
+
+    /**
+     * 更新分类排序数值
+     * @param $data
+     */
+    public function changeStatus($data){
+        $save_data = [
+            'status' => $data['status'],
+            'update_time' => time()
+        ];
+        $result = $this->where('id',$data['id'])->save($save_data);
+        return $result;
+    }
+
+    /**
+     * 获取是否有已开启秒杀商品
+     * @param $data
+     * @return \think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function isSpikeGoods($data){
+        $where = [
+            "is_spike" => config("status.mysql.is_spike"),
+            "status" => config("status.mysql.table_normal"),
+        ];
+        $result = $this->where('id',"<>",$data['id'])
+        ->where($where)->select();
         return $result;
     }
 
@@ -112,6 +145,7 @@ class Goods extends BaseModel
             "id" => "desc"
         ];
         $where = [
+            "is_spike" => config("status.mysql.is_no_spike"),
             "status" => config("status.mysql.table_normal"),
         ];
         $result = $this->whereFindInSet("category_path_id",$categoryId)
@@ -134,6 +168,7 @@ class Goods extends BaseModel
      */
     public function getGoodsLists($categoryId,$field,$pageSize,$order,$keywords){
         $where = [
+            "is_spike" => config("status.mysql.is_no_spike"),
             "status" => config("status.mysql.table_normal"),
         ];
         $res = $this;

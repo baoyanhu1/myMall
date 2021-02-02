@@ -105,6 +105,27 @@
                             </div>
                         </div>
 
+
+<!--                        byh start 是否秒杀-->
+                        <div class="layui-form layui-form-item">
+                            <label class="layui-form-label">秒杀商品</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="goods_spike" lay-filter="spike" value="0" title="否" checked="">
+                                <input type="radio" name="goods_spike" lay-filter="spike" value="1" title="是">
+                            </div>
+                        </div>
+
+                        <div class="layui-form layui-form-item spike_more" style="display: none">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">秒杀时间</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="spike_time" id="goods_spike" autocomplete="off"
+                                           class="layui-input" style="width: 300px">
+                                </div>
+                            </div>
+                        </div>
+<!--                        byh end 是否秒杀-->
+
                         <div class="layui-form layui-form-item">
                             <label class="layui-form-label">商品规格</label>
                             <div class="layui-input-block">
@@ -245,6 +266,12 @@
             elem: '#goods_date'
         });
 
+        laydate.render({
+            elem: '#goods_spike'
+            ,type: 'datetime'
+            ,range: '~' //或 range: '~' 来自定义分割字符
+        });
+
         layedit.set({
             uploadImage: {
                 url: '{:url('image/layUpload')}',
@@ -259,6 +286,14 @@
             // 多规格处理
             $('.spec-more').css('display', (data.value == 2 ? 'block' : 'none'));
             $('.spec-is-show').css('display', (data.value == 1 ? 'block' : 'none'));
+        });
+
+        form.on('radio(spike)', function (data) {
+            // 是否秒杀商品（是显示秒杀时间）
+            $('.spike_more').css('display', (data.value == 1 ? 'block' : 'none'));
+            if (data.value == 0){
+                $('#goods_spike').val('')
+            }
         });
 
 
