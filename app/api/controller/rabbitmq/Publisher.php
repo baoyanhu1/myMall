@@ -52,6 +52,6 @@ class Publisher
         $channel->basic_publish($message, $amqpDetail['exchange_name'],$amqpDetail['route_key']);
         $channel->close();
         $connection->close();
-        echo  "ok";
+//        echo  "ok";
     }
 }

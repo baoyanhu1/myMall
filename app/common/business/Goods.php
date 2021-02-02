@@ -216,7 +216,6 @@ class Goods extends BusBase
         } else {
             $sku = $specsValueBus->getSpecsValueById($gids, $flagValue);
         }
-
         $result['title'] = $goods['title'];
         $result['price'] = $goodsDetail['price'];
         $result['cost_price'] = $goodsDetail['cost_price'];
@@ -225,6 +224,9 @@ class Goods extends BusBase
         $result['gids'] = $gids;
         $result['image'] = explode(",", $goods['carousel_image']);
         $result['sku'] = $sku;
+//        以下两条用于商品秒杀时间
+        $result['spike_start_time'] = date("Y-m-d h:i:s",$goods['spike_start_time']);
+        $result['spike_end_time'] = date("Y-m-d h:i:s",$goods['spike_end_time']);
         $result['detail'] = [
             "d1" => [
                 "商品编号" => $goodsDetail['id'],
@@ -281,12 +283,15 @@ class Goods extends BusBase
             foreach ($skuIds as $skuId){
                 Cache::hDel("goods-spike",$skuId);
             }
+//            删除存储用户的redisKey
+            Cache::del("goods-spike-user");
         }else{
             //开启一个秒杀商品需判断当前存不存在秒杀商品（如果存在则提示关闭）
             $isSpike = $this->model->isSpikeGoods($data)->toArray();
             if ($isSpike){
                 throw new Exception('当前已有秒杀商品,请先将其关闭');
             }
+            $specsValueBus = new SpecsValue();
             //如果开启一个秒杀商品则将当前秒杀商品的所有sku信息存入redis
             foreach ($goodsSkuInfo as $goodsSku) {
                 $redisData = [
@@ -295,9 +300,10 @@ class Goods extends BusBase
                     "price" => $goodsSku['price'],
                     "stock" => $goodsSku['stock'],
 //                用户地址应是用户下单传的（伪造测试）
-                    "address_id" => "1",
+//                    "address_id" => "1",
                     "goods_id" => $goodsSku['goods_id'],
                     "specs_value_ids" => $goodsSku['specs_value_ids'],
+                    "sku_specs_value" => $specsValueBus->dealSpecsValues(explode(',',$goodsSku['specs_value_ids'])),
                     "sku_id" => $goodsSku['id'],
                     "start_time" => $goodsInfo['spike_start_time'],
                     "end_time" => $goodsInfo['spike_end_time'],
@@ -322,6 +328,23 @@ class Goods extends BusBase
     public function getById($id)
     {
         $categoryInfo = $this->model->find($id);
+        if (!$categoryInfo) {
+            return [];
+        }
+        return $categoryInfo;
+    }
+
+    /**
+     * 获取当前秒杀商品
+     * @return array|\think\Model
+     */
+    public function getGoodsSpike(){
+        $field = "sku_id as id,title,price,recommend_image as image,sales_count";
+        try {
+            $categoryInfo = $this->model->getGoodsSpike($field);
+        }catch (Exception $e){
+            return [];
+        }
         if (!$categoryInfo) {
             return [];
         }

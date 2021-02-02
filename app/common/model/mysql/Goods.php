@@ -187,4 +187,22 @@ class Goods extends BaseModel
             ->paginate($pageSize);
         return $result;
     }
+
+    /**
+     * 获取当前秒杀商品
+     * @return array|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGoodsSpike($field){
+        $where = [
+            "is_spike" => config("status.mysql.is_spike"),
+            "status" => config("status.mysql.table_normal"),
+        ];
+        $result = $this->where($where)
+            ->field($field)
+            ->find();
+        return $result;
+    }
 }
