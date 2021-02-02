@@ -33,4 +33,14 @@ class Index extends ApiBase
         $result = $goodsBus->categoryGoodsRecommend($categoryIds);
         return Show::success($result);
     }
+
+    /**
+     * 获取当前秒杀商品
+     * @return \think\response\Json
+     */
+    public function spike(){
+        $goodsBus = new GoodsBus();
+        $result = $goodsBus->getGoodsSpike();
+        return Show::success($result);
+    }
 }

@@ -11,5 +11,9 @@ Route::rule('subcategory/:id','category/sub');
 Route::rule('lists','mall.lists/index');
 //获取商品详情
 Route::rule('detail/:id','mall.detail/index');
+//获取抢购商品详情
+Route::rule('spikeDetail/:id','mall.spikeDetail/index');
 //创建订单
 Route::resource("order","order.index");
+//秒杀商品订单页获取秒杀商品信息
+Route::rule("spikeOrder/:id","order.spike/index");

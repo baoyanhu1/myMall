@@ -4,6 +4,7 @@
 namespace app\common\business;
 
 use app\api\controller\rabbitmq\CheckOrderPublisher;
+use app\common\lib\Show;
 use app\common\model\mysql\Order as OrderModel;
 use app\common\lib\Snowflake;
 use think\Exception;
@@ -115,15 +116,15 @@ class Order extends BusBase
      */
     public function saveSpikeOrder($data){
         $spikeData = json_decode($data,true);
-        //        生成订单号（使用雪花算法IDWorker）
-        $workId = rand(1,1023);
-        $orderId = Snowflake::getInstance()->setWorkId($workId)->nextId();
-        $orderId = (string) $orderId;
+//        //        生成订单号（使用雪花算法IDWorker）
+//        $workId = rand(1,1023);
+//        $orderId = Snowflake::getInstance()->setWorkId($workId)->nextId();
+//        $orderId = (string) $orderId;
 
 //        插入order表的数据
         $orderData = [
             "user_id" => $spikeData['user_id'],
-            "order_id" => $orderId,
+            "order_id" => $spikeData['order_id'],
             "total_price" => $spikeData['price'],
             "address_id" => $spikeData['address_id'],
             "is_spike" => config("status.mysql.table_normal")
@@ -134,7 +135,7 @@ class Order extends BusBase
         $specsValues = $specsValueBus->dealSpecsValues(explode(",",$spikeData['specs_value_ids']));
 
         $orderGoodsData = [
-            "order_id" => $orderId,
+            "order_id" => $spikeData['order_id'],
             "sku_id" => $spikeData['sku_id'],
             "sku" => implode(" ",$specsValues),
             "goods_id" => $spikeData['goods_id'],
@@ -158,7 +159,7 @@ class Order extends BusBase
             if ($orderResult && $orderGoodsResult){
                 $publisherData = [
                     "user_id" => $spikeData['user_id'],
-                    "order_id" => $orderId,
+                    "order_id" => $spikeData['order_id'],
                     "sku_id" => $spikeData['sku_id'],
                 ];
                 $checkOrderPublisherObj = new CheckOrderPublisher();
@@ -254,5 +255,24 @@ class Order extends BusBase
         $order['consignee_info'] = $detailAreaStr;
         $order['malls'] = $orderGoods;
         return $order;
+    }
+
+    /**
+     * 根据skuId获取redis内存储的商品信息
+     * @param $id
+     * @return mixed
+     * @throws Exception
+     */
+    public function getSpikeOrderBySkuId($id){
+        //        获取redis内存储数据信息
+        $goodsSkipeInfo = Cache::hGet("goods-spike",$id);
+
+//        先判断缓存内是否有当前商品
+        if (!$goodsSkipeInfo){
+            throw new Exception("当前商品秒杀活动已结束");
+        }
+        $goodsSkipeInfo = json_decode($goodsSkipeInfo,true);
+        return $goodsSkipeInfo;
+
     }
 }

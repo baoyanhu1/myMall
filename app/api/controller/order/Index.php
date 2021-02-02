@@ -50,6 +50,7 @@ class Index extends AuthBase
      */
     public function read(){
         $order_id = input("param.id","","trim");
+//        dump($order_id);
         $data = [
             "id" => $order_id
         ];
