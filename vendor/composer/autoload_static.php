@@ -10,8 +10,8 @@ class ComposerStaticInitc1126e6713cc55929e9a92bcf628215f
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '9b552a3cc426e3287cc811caefa3cf53' => __DIR__ . '/..' . '/topthink/think-helper/src/helper.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
@@ -31,6 +31,10 @@ class ComposerStaticInitc1126e6713cc55929e9a92bcf628215f
             'think\\captcha\\' => 14,
             'think\\app\\' => 10,
             'think\\' => 6,
+        ),
+        'd' => 
+        array (
+            'dh2y\\qrcode\\' => 12,
         ),
         'c' => 
         array (
@@ -105,10 +109,14 @@ class ComposerStaticInitc1126e6713cc55929e9a92bcf628215f
         ),
         'think\\' => 
         array (
-            0 => __DIR__ . '/..' . '/topthink/think-helper/src',
-            1 => __DIR__ . '/..' . '/topthink/think-orm/src',
-            2 => __DIR__ . '/..' . '/topthink/framework/src/think',
+            0 => __DIR__ . '/..' . '/topthink/framework/src/think',
+            1 => __DIR__ . '/..' . '/topthink/think-helper/src',
+            2 => __DIR__ . '/..' . '/topthink/think-orm/src',
             3 => __DIR__ . '/..' . '/topthink/think-template/src',
+        ),
+        'dh2y\\qrcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dh2y/think-qrcode/src',
         ),
         'clagiordano\\weblibs\\configmanager\\' => 
         array (

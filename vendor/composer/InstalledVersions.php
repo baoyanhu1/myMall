@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '49dc16adb2e7ef55b0f9924fb3f8e0709319b6aa',
+    'reference' => '3c61e6200209983e936ec3e7c3dfa1d78fd74cb7',
     'name' => 'topthink/think',
   ),
   'versions' => 
@@ -47,182 +47,182 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/actiontrail' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/adb' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/aegis' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/afs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/airec' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/alidns' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/alikafka' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/alimt' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/aliprobe' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/aliyuncvc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/appmallsservice' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/arms' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/arms4finance' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/baas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/batchcompute' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/bss' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/bssopenapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cbn' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ccc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ccs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cdn' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cds' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cf' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/chatbot' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/client' => 
@@ -238,1003 +238,1003 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cloudauth' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cloudesl' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cloudmarketing' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cloudphoto' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cloudwf' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cms' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/commondriver' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/companyreg' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cr' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/crm' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/csb' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/cusanalyticsconline' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dataworkspublic' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dbs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dcdn' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dds' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/democenter' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dm' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dmsenterprise' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/domain' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/domainintl' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/drcloud' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/drds' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dts' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dybaseapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dyplsapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dypnsapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dysmsapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/dyvmsapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/eci' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ecs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ecsinc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/edas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ehpc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/elasticsearch' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/emr' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ess' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/facebody' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/fnf' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/foas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ft' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/goodstech' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/gpdb' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/green' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/hbase' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/hiknoengine' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/hpc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/hsm' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/httpdns' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/idst' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/imageaudit' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/imageenhan' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/imagerecog' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/imagesearch' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/imageseg' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/imm' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/industrybrain' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/iot' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/iqa' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/itaas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ivision' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ivpd' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/jaq' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/jarvis' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/jarvispublic' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/kms' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/linkedmall' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/linkface' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/linkwan' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/live' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/lubancloud' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/lubanruler' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/market' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/mopen' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/mpserverless' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/mts' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/multimediaai' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/nas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/netana' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/nlp' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/nlpautoml' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/nlscloudmeta' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/nlsfiletrans' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/objectdet' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ocr' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ocs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/oms' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ons' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/onsmqtt' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/oos' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/openanalytics' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ossadmin' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ots' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/outboundbot' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/petadata' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/polardb' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/productcatalog' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/pts' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/push' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/pvtz' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/qualitycheck' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ram' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/rds' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/reid' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/retailcloud' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/rkvstore' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ros' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/rtc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/saf' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/sas' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/sasapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/scdn' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/schedulerx2' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/sdk' => 
     array (
-      'pretty_version' => '1.8.825',
-      'version' => '1.8.825.0',
+      'pretty_version' => '1.8.846',
+      'version' => '1.8.846.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ebc52e04ae8cdd3ef9cd10e4473fd8c76adc685b',
+      'reference' => 'd8560b4627b89c2f849c616d0c8cc4a41ee46748',
     ),
     'alibabacloud/skyeye' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/slb' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/smartag' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/smc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/sms' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/smsintl' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/snsuapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/sts' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/taginner' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/tesladam' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/teslamaxcompute' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/teslastream' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ubsms' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/ubsmsinner' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/uis' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/unimkt' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/visionai' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/vod' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/voicenavigator' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/vpc' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/vs' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/wafopenapi' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/welfareinner' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/xspace' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/xtrace' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/yqbridge' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'alibabacloud/yundun' => 
     array (
       'replaced' => 
       array (
-        0 => '1.8.825',
+        0 => '1.8.846',
       ),
     ),
     'aliyuncs/oss-sdk-php' => 
@@ -1263,6 +1263,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'df24ab62d2d8213bbbe88cc36fc35a4503b4bd7e',
+    ),
+    'dh2y/think-qrcode' => 
+    array (
+      'pretty_version' => '2.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '977d032afa27b1852f5fc5441fad2497f6db7ff5',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -1465,7 +1474,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '49dc16adb2e7ef55b0f9924fb3f8e0709319b6aa',
+      'reference' => '3c61e6200209983e936ec3e7c3dfa1d78fd74cb7',
     ),
     'topthink/think-captcha' => 
     array (
