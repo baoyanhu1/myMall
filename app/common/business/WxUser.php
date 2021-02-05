@@ -70,11 +70,13 @@ class WxUser extends BusBase
                     "create_time" => time(),
                     "update_time" => time(),
                     "status" => config("status.mysql.table_normal"),
+                    "type" => "2"
                 ];
 
                 $this->model->saveWxUser($info);
                 $user_id = $this->model->id;
                 $username = $this->model->wx_name;
+                $type = $this->model->type;
 
             }else
             {
@@ -86,6 +88,7 @@ class WxUser extends BusBase
                 $this->model->updateWxUser($data['openid'],$updateData);
                 $user_id = $this->model->id;
                 $username = $this->model->wx_name;
+                $type = $this->model->type;
 
             }
 
@@ -98,7 +101,7 @@ class WxUser extends BusBase
             "user_id" => $user_id,
             "username" => $username
         ];
-        $res = cache(config("redis.token").$token,$token_data,Time::tokenDataExpireTime($data['type']));
+        $res = cache(config("redis.token").$token,$token_data,Time::tokenDataExpireTime($type));
         return $res ? ['token' => $token,'username'=>$username] : false;
 
     }

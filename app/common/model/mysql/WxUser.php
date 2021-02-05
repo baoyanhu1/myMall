@@ -27,7 +27,7 @@ class WxUser extends Model
      */
     public function saveWxUser($data)
     {
-        return $this->save($data);
+        return $this->insert($data);
     }
 
     /**

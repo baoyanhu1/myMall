@@ -34,6 +34,6 @@ return[
         'APP_KEY'    => 'wx0e685b6c2ed0ba7c', //应用注册成功后分配的 APP ID
         'APP_SECRET' => '9a280145f59cbf70597f0dbdee980461', //应用注册成功后分配的KEY
         //'CALLBACK'   => URL_CALLBACK . 'weixin',
-        'CALLBACK' => "http://www.wegame.icu/api/Weixin", //回调地址
+        'CALLBACK' => "http://www.wegame.icu/api/WxLogin/getCode", //回调地址
     ]
 ];
