@@ -64,7 +64,7 @@ class CheckOrderPublisher
             //TODO 记录日志
         }
         //延迟时间'x-delay'=> 60000参数毫秒  60000为一分钟
-        $exchange->publish($message, $params['routeKey'], AMQP_NOPARAM, ['headers'=>['x-delay'=> 60000]]);
+        $exchange->publish($message, $params['routeKey'], AMQP_NOPARAM, ['headers'=>['x-delay'=> 60000 * 3]]);
         echo '当前发送消息时间：'.date("Y-m-d H:i:s", time());
 //        for($i=5;$i>0;$i--){
 //            //生成消息
