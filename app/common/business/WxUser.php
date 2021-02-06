@@ -73,10 +73,10 @@ class WxUser extends BusBase
                     "type" => "2"
                 ];
 
-                $this->model->saveWxUser($info);
-                $user_id = $this->model->id;
-                $username = $this->model->wx_name;
-                $type = $this->model->type;
+                $user = $this->model->getUserInfoById($this->model->saveWxUser($info));
+                $user_id = $user['id'];
+                $username = $user['wx_name'];
+                $type = $user['type'];
 
             }else
             {
@@ -86,9 +86,9 @@ class WxUser extends BusBase
                 ];
 
                 $this->model->updateWxUser($data['openid'],$updateData);
-                $user_id = $this->model->id;
-                $username = $this->model->wx_name;
-                $type = $this->model->type;
+                $user_id = $UserInfo['id'];
+                $username = $UserInfo['wx_name'];
+                $type = $UserInfo['type'];
 
             }
 

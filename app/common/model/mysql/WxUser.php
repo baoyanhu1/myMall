@@ -27,7 +27,7 @@ class WxUser extends Model
      */
     public function saveWxUser($data)
     {
-        return $this->insert($data);
+        return $this->insertGetId($data);
     }
 
     /**
@@ -42,6 +42,22 @@ class WxUser extends Model
     {
         $where = [
             "openid" => $openid
+        ];
+        return $this->where($where)->find();
+    }
+
+    /**
+     * 使用主键ID找到当前用户
+     * @param $id
+     * @return array|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getUserInfoById($id)
+    {
+        $where = [
+            "id" => $id
         ];
         return $this->where($where)->find();
     }
