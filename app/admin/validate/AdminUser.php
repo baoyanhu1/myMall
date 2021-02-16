@@ -12,7 +12,7 @@ class AdminUser extends Validate
         "username" => "require",
         "password" => "require",
         "password_confirm" => "require",
-//        "captcha" => "require|checkCaptcha",
+        "captcha" => "require|checkCaptcha",
         "id" => "require",
         "status" => "require",
         "roleId" => "require"
@@ -24,7 +24,7 @@ class AdminUser extends Validate
         "password_confirm.require" => '再次输入密码不能为空',
         "password.confirm" => '两次密码不一致',
         "password.min" => '请输入不小于6位密码',
-//        "captcha" => "验证码必填",
+        "captcha" => "验证码必填",
         "roleId.require" => "用户ID不可为空"
     ];
 
@@ -38,7 +38,7 @@ class AdminUser extends Validate
     // login 验证场景定义
     public function sceneLogin()
     {
-        return $this->only(['username','password']);
+        return $this->only(['username','password','captcha']);
     }
 
     // user 验证场景定义
