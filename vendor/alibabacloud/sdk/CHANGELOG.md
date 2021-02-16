@@ -1,5 +1,89 @@
 # CHANGELOG
 
+## 1.8.846 - 2021-2-5
+- Generated 2020-05-18 for `dataworks-public`.
+
+
+## 1.8.845 - 2021-2-5
+- Test.
+
+
+## 1.8.844 - 2021-2-5
+- Update Open API.
+
+
+## 1.8.843 - 2021-2-5
+- Generated 2020-05-18 for `dataworks-public`.
+
+
+## 1.8.842 - 2021-2-4
+- Update DetectVehicleIllegalParking DetectVehicleICongestion.
+
+
+## 1.8.841 - 2021-2-4
+- Supported scheduler for outbound call.
+
+
+## 1.8.840 - 2021-2-4
+- Supported console.
+
+
+## 1.8.839 - 2021-2-4
+- Supported console.
+
+
+## 1.8.838 - 2021-2-4
+- Update TaggingImage.
+
+
+## 1.8.837 - 2021-2-3
+- After normalizing the API group name, regenerate the SDK.
+
+
+## 1.8.836 - 2021-2-3
+- Support connection drain.
+
+
+## 1.8.835 - 2021-2-2
+- Add.
+
+
+## 1.8.834 - 2021-2-2
+- CreateShardingDBInstance add ReadOnlyReplicas in ReplicaSet.
+
+
+## 1.8.833 - 2021-2-1
+- Support device credential for mqtt.
+
+
+## 1.8.832 - 2021-2-1
+- Release GenerateHumanSketchStyle MergeImageFace AddFaceImageTemplate QueryFaceImageTemplate DeleteFaceImageTemplate.
+
+
+## 1.8.831 - 2021-2-1
+- Add.
+
+
+## 1.8.830 - 2021-2-1
+- Release GenerateHumanSketchStyle MergeImageFace AddFaceImageTemplate QueryFaceImageTemplate DeleteFaceImageTemplate.
+
+
+## 1.8.829 - 2021-2-1
+- Release RecognizeFood.
+
+
+## 1.8.828 - 2021-2-1
+- Release UnderstandVideoContent.
+
+
+## 1.8.827 - 2021-2-1
+- Release SegmentGreenScreenVideo.
+
+
+## 1.8.826 - 2021-2-1
+- Release DetectVehicleIllegalParking DetectVehicleICongestion.
+
+
 ## 1.8.825 - 2021-1-29
 - Update Monitor Api.
 

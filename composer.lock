@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "367fe0824da8a78c1b0c685407f36c08",
+    "content-hash": "2d67be85286476c80a75bca2e08a5f20",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -146,16 +146,16 @@
         },
         {
             "name": "alibabacloud/sdk",
-            "version": "1.8.825",
+            "version": "1.8.846",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aliyun/openapi-sdk-php.git",
-                "reference": "ebc52e04ae8cdd3ef9cd10e4473fd8c76adc685b"
+                "reference": "d8560b4627b89c2f849c616d0c8cc4a41ee46748"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aliyun/openapi-sdk-php/zipball/ebc52e04ae8cdd3ef9cd10e4473fd8c76adc685b",
-                "reference": "ebc52e04ae8cdd3ef9cd10e4473fd8c76adc685b",
+                "url": "https://api.github.com/repos/aliyun/openapi-sdk-php/zipball/d8560b4627b89c2f849c616d0c8cc4a41ee46748",
+                "reference": "d8560b4627b89c2f849c616d0c8cc4a41ee46748",
                 "shasum": ""
             },
             "require": {
@@ -380,7 +380,7 @@
                 "issues": "https://github.com/aliyun/openapi-sdk-php/issues",
                 "source": "https://github.com/aliyun/openapi-sdk-php"
             },
-            "time": "2021-01-29T03:36:27+00:00"
+            "time": "2021-02-05T09:46:57+00:00"
         },
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -538,6 +538,47 @@
                 "source": "https://github.com/danielstjules/Stringy"
             },
             "time": "2017-06-12T01:10:27+00:00"
+        },
+        {
+            "name": "dh2y/think-qrcode",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cinaofdai/think-qrcode.git",
+                "reference": "977d032afa27b1852f5fc5441fad2497f6db7ff5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cinaofdai/think-qrcode/zipball/977d032afa27b1852f5fc5441fad2497f6db7ff5",
+                "reference": "977d032afa27b1852f5fc5441fad2497f6db7ff5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "dh2y\\qrcode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dh2y",
+                    "email": "xiaodai54_long@163.com"
+                }
+            ],
+            "description": "qrcode for thinkphp5",
+            "homepage": "https://github.com/cinaofdai/think-qrcode",
+            "support": {
+                "issues": "https://github.com/cinaofdai/think-qrcode/issues",
+                "source": "https://github.com/cinaofdai/think-qrcode/tree/2.0"
+            },
+            "time": "2019-07-10T02:57:29+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

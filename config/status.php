@@ -28,5 +28,12 @@ return[
 //        是否为秒杀商品
         "is_spike" => 1,//是秒杀商品
         "is_no_spike" => 0,//不是秒杀商品
+    ],
+//   微信登录
+    "THINK_SDK_WEIXIN" => [
+        'APP_KEY'    => 'wx0e685b6c2ed0ba7c', //应用注册成功后分配的 APP ID
+        'APP_SECRET' => '9a280145f59cbf70597f0dbdee980461', //应用注册成功后分配的KEY
+        //'CALLBACK'   => URL_CALLBACK . 'weixin',
+        'CALLBACK' => "http://www.wegame.icu/api/WxLogin/getCode", //回调地址
     ]
 ];
